@@ -1,0 +1,11 @@
+.recipeCard:hover {
+  border: 0.1rem solid rgba(0, 0, 0, 0.2);
+  box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.2);
+  transform: scale(1.05);
+}
+
+.imgContainer {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.1s linear;
+}

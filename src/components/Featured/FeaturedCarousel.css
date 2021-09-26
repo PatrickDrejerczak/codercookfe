@@ -1,0 +1,12 @@
+.featuredCarousel {
+  margin: 0 auto;
+  width: 1500px;
+  height: 500px;
+  border: solid black 1px;
+  margin-bottom: 40px;
+  margin-top: 40px;
+}
+
+.carouselImage {
+  height: 500px;
+}

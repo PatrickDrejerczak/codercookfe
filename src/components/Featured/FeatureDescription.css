@@ -1,0 +1,23 @@
+.featureBox {
+  display: flex;
+  justify-content: space-between;
+
+  margin-bottom: 20px;
+}
+
+.leftBox {
+  display: flex;
+  justify-content: space-between;
+  margin-right: 30px;
+  margin-left: 60px;
+}
+
+.featureArticle {
+  font-size: 30px;
+  font-weight: 400;
+  text-align: justify;
+}
+
+.rightBox {
+  margin-right: 60px;
+}
