@@ -1,5 +1,4 @@
 import React from "react";
-import { useState } from "react";
 import "antd/dist/antd.css";
 import { Layout, Menu } from "antd";
 import CategoryRender from "../CategoryRender/CategoryRender";
@@ -9,15 +8,9 @@ const { Content, Sider } = Layout;
 const { SubMenu } = Menu;
 
 const CategorySidebar = () => {
-  const [collapsed, setCollapsed] = useState(false);
-
   return (
     <Layout style={{ minHeight: "100vh" }}>
-      <Sider
-        collapsible
-        collapsed={collapsed}
-        onCollapse={() => setCollapsed(!collapsed)}
-      >
+      <Sider>
         <div className="logo" />
         <Menu theme="dark" defaultSelectedKeys={["1"]} mode="inline">
           <SubMenu key="sub1" title="Country">

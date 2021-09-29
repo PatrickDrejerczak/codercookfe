@@ -26,7 +26,8 @@ const ModalBox = (props) => {
       </Modal.Body>
       <Modal.Footer>
         <Button onClick={props.onHide}>Close</Button>
-        <Link as={Link} to={`recipe/${takeId}`}>
+
+        <Link as={Link} to={`/recipe/${takeId}`}>
           <Button>See Detailed Recipe</Button>
         </Link>
       </Modal.Footer>

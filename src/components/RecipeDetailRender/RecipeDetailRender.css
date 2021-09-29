@@ -1,0 +1,37 @@
+.detailFooter {
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 5vh;
+  padding-bottom: 3vh;
+}
+
+.detailCard {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 65vw;
+  margin-top: 3vh;
+}
+
+.container-fluid {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.detailTitle {
+  font-size: 3rem;
+  padding-top: 1.2vh;
+  padding-bottom: 0.8vh;
+}
+
+.detailSubtitle {
+  font-size: 1.5rem;
+  padding-top: 0.1vh;
+  padding-bottom: 1.1vh;
+}
+
+.detailInstruction {
+  font-size: 1.5rem;
+  padding-top: 1vh;
+}

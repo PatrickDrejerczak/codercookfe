@@ -2,10 +2,10 @@ import React from "react";
 
 import recipeActions from "../../redux/actions/recipe.action";
 import { useDispatch, useSelector } from "react-redux";
-import "./ImgUploadButton.css";
+import "./AvatarUploadButton.css";
 import { Button } from "react-bootstrap";
 
-const ImgUploadButton = () => {
+const AvatarUploadButton = () => {
   const dispatch = useDispatch();
   const urlToImage = useSelector((state) => state.recipe.urlToImage);
   var myWidget = window.cloudinary.createUploadWidget(
@@ -16,7 +16,7 @@ const ImgUploadButton = () => {
     (error, result) => {
       if (!error && result && result.event === "success") {
         console.log("Done! Here is the image info: ", result.info);
-        dispatch(recipeActions.uploadImage({ urlToImage: result.info.url }));
+        dispatch(recipeActions.uploadImage({ avatarUrl: result.info.url }));
       }
     }
   );
@@ -41,4 +41,4 @@ const ImgUploadButton = () => {
   );
 };
 
-export default ImgUploadButton;
+export default AvatarUploadButton;

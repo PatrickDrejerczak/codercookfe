@@ -6,12 +6,11 @@ import api from "../api";
 const getAllRecipes = () => async (dispatch) => {
   dispatch({ type: types.GET_RECIPE_REQUEST, payload: null });
   try {
-    let url = `${process.env.REACT_APP_BACKEND_API}recipe`;
-    const data = await api.get(url);
+    const data = await api.get(`recipe`);
 
     dispatch({
       type: types.GET_RECIPE_SUCCESS,
-      payload: data.data.completed,
+      payload: data.data.data.recipes,
     });
   } catch (error) {
     toast.error(error.message);
@@ -50,7 +49,7 @@ const getRecipeByCategory =
   async (dispatch) => {
     dispatch({ type: types.GET_RECIPE_BY_CATEGORY_REQUEST, payload: null });
     try {
-      const data = await api.get(`recipe/category/${name}`);
+      const data = await api.get(`recipe/category/${name}?limit=4`);
 
       dispatch({
         type: types.GET_RECIPE_BY_CATEGORY_SUCCESS,
@@ -59,6 +58,23 @@ const getRecipeByCategory =
     } catch (error) {
       toast.error(error.message);
       dispatch({ type: types.GET_RECIPE_BY_CATEGORY_FAILURE, payload: error });
+    }
+  };
+
+const getRecipeByUserId =
+  ({ userId }) =>
+  async (dispatch) => {
+    dispatch({ type: types.GET_RECIPE_BY_USER_ID_REQUEST, payload: null });
+    try {
+      const data = await api.get(`recipe/user/${userId}`);
+
+      dispatch({
+        type: types.GET_RECIPE_BY_USER_ID_SUCCESS,
+        payload: data.data.data.recipes,
+      });
+    } catch (error) {
+      toast.error(error.message);
+      dispatch({ type: types.GET_RECIPE_BY_USER_ID_FAILURE, payload: error });
     }
   };
 
@@ -131,6 +147,12 @@ const match = () => async (dispatch) => {
   }
 };
 
+const uploadImage =
+  ({ urlToImage }) =>
+  (dispatch) => {
+    dispatch({ type: types.UPLOAD_IMAGE, payload: urlToImage });
+  };
+
 const recipeActions = {
   getAllRecipes,
   getSingleRecipe,
@@ -140,5 +162,7 @@ const recipeActions = {
   createRecipe,
   getRecipeByCategory,
   selectedId,
+  uploadImage,
+  getRecipeByUserId,
 };
 export default recipeActions;

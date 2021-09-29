@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { authActions } from "../../redux/actions/auth.action";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { routeActions } from "../../redux/actions/route.action";
+import "./SignupForm.css";
 
 const SignupForm = () => {
   const [formData, setFormData] = useState({
@@ -51,13 +52,18 @@ const SignupForm = () => {
   }, [dispatch, history, redirectTo]);
 
   return (
-    <Container>
+    <Container className="signUpContainer">
       <Row>
         <Col md={{ span: 6, offset: 3 }}>
           <div className="text-center mb-3">
             <h1 className="text-primary">Sign Up</h1>
             <p className="lead">
-              <FontAwesomeIcon icon="user" size="1x" /> Create Your Account
+              <FontAwesomeIcon
+                icon="user"
+                size="1x"
+                className="signUpFormTitle"
+              />{" "}
+              Create Your Account
             </p>
           </div>
           <Form onSubmit={handleSubmit}>
@@ -137,7 +143,11 @@ const SignupForm = () => {
                 Loading...
               </Button>
             ) : (
-              <Button className="btn-block" type="submit" variant="primary">
+              <Button
+                className="btn-block signUpButton"
+                type="submit"
+                variant="primary"
+              >
                 Register
               </Button>
             )}

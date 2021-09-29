@@ -27,6 +27,7 @@ const RecipeCard = ({ recipe }) => {
         <Link as={Link} to={`category/${recipe.category}`}>
           <Card.Text>{recipe.category}</Card.Text>
         </Link>
+        <Card.Text>{recipe.description}</Card.Text>
 
         <ModalBox show={modalShow} onHide={() => setModalShow(false)} />
       </Card.Body>

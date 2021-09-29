@@ -1,23 +1,19 @@
 import React from "react";
-import { useState } from "react";
+
 import "antd/dist/antd.css";
 import { Layout, Menu } from "antd";
 
 import { MDBIcon } from "mdb-react-ui-kit";
 import RecipeDetailRender from "../RecipeDetailRender/RecipeDetailRender";
+import Footer from "../Footer/Footer";
 
 const { Content, Sider } = Layout;
 const { SubMenu } = Menu;
 
 const RecipeSidebar = () => {
-  const [collapsed, setCollapsed] = useState(false);
   return (
     <Layout style={{ minHeight: "100vh" }}>
-      <Sider
-        collapsible
-        collapsed={collapsed}
-        onCollapse={() => setCollapsed(!collapsed)}
-      >
+      <Sider>
         <div className="logo" />
         <Menu theme="dark" defaultSelectedKeys={["1"]} mode="inline">
           <SubMenu key="sub1" title="Country">
@@ -61,9 +57,12 @@ const RecipeSidebar = () => {
           <div
             className="site-layout-background"
             style={{ padding: 24, minHeight: 360 }}
-          ></div>
-          <RecipeDetailRender />
+          >
+            {" "}
+            <RecipeDetailRender />
+          </div>
         </Content>
+        <Footer />
       </Layout>
     </Layout>
   );

@@ -1,17 +1,17 @@
 import { toast } from "react-toastify";
-import * as types from "../constants/ingredient.constant";
-import { routeActions } from "./route.actions";
-import api from "../../apiService";
+import * as types from "../constants/category.constant";
+import { routeActions } from "./route.action";
+import recipeActions from "./recipe.action";
+import api from "../api";
 
 const getAllCategories = () => async (dispatch) => {
   dispatch({ type: types.GET_CATEGORY_REQUEST, payload: null });
   try {
-    let url = `${process.env.REACT_APP_BACKEND_API}category`;
-    const data = await api.get(url);
+    const data = await api.get("category");
 
     dispatch({
       type: types.GET_CATEGORY_SUCCESS,
-      payload: data.data.completed,
+      payload: data.data.data.categories,
     });
   } catch (error) {
     toast.error(error.message);
@@ -54,18 +54,18 @@ const createCategory = (formData) => async (dispatch) => {
 
 const updateCategory = (categoryId, formData) => async (dispatch) => {
   try {
-    dispatch({ type: types.UPDATE_CATEGORY_REQUEST, payload: null });
+    dispatch({ type: types.PUT_CATEGORY_REQUEST, payload: null });
     const res = await api.put(`/category/${categoryId}`, formData);
 
     dispatch({
-      type: types.UPDATE_CATEGORY_SUCCESS,
+      type: types.PUT_CATEGORY_SUCCESS,
       payload: res.data.data,
     });
 
     dispatch(routeActions.redirect("__GO_BACK__"));
     toast.success("The category has been updated successfully!");
   } catch (err) {
-    dispatch({ type: types.UPDATE_CATEGORY_FAILURE, payload: err });
+    dispatch({ type: types.PUT_CATEGORY_FAILURE, payload: err });
     toast.error("Something went wrong");
   }
 };
@@ -88,11 +88,11 @@ const deleteCategory =
     }
   };
 
-const recipeActions = {
+const categoryActions = {
   getAllCategories,
   getSingleCategory,
   deleteCategory,
   updateCategory,
   createCategory,
 };
-export default recipeActions;
+export default categoryActions;

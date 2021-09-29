@@ -3,15 +3,15 @@ import RecipeCard from "../RecipeCard/RecipeCard";
 import { Row, Col } from "react-bootstrap";
 import api from "../../redux/api";
 
-const RenderVegetarian = () => {
+const RenderWestern = () => {
   const [data, setData] = useState([]);
   useEffect(() => {
-    const fetchVegetarian = async () => {
-      const res = await api.get("recipe/category/vegetarian");
-      console.log("vegetarian data", res);
+    const fetchWestern = async () => {
+      const res = await api.get("recipe/category/western");
+      console.log("western data", res);
       setData(res.data.data.recipes);
     };
-    fetchVegetarian();
+    fetchWestern();
   }, []);
   console.log("data", data);
   return (
@@ -26,4 +26,4 @@ const RenderVegetarian = () => {
   );
 };
 
-export default RenderVegetarian;
+export default RenderWestern;

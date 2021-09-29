@@ -1,4 +1,3 @@
-import Header from "../components/Header/Header";
 import { useDispatch } from "react-redux";
 import recipeActions from "../../src/redux/actions/recipe.action";
 import { useParams } from "react-router";
@@ -11,10 +10,9 @@ const RecipeDetailPage = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(recipeActions.getSingleRecipe({ id }));
-  }, [dispatch]);
+  }, [dispatch, id]);
   return (
     <div>
-      <Header />
       <RecipeSidebar />
     </div>
   );
