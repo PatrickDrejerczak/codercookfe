@@ -4,6 +4,7 @@ const initialState = {
   categories: [],
   loading: false,
   selectedCategory: null,
+  category: [],
 };
 
 const categoryReducer = (state = initialState, action) => {
@@ -11,15 +12,14 @@ const categoryReducer = (state = initialState, action) => {
   switch (type) {
     case types.GET_CATEGORY_REQUEST:
     case types.GET_SINGLE_CATEGORY_REQUEST:
-    case types.CREATE_CATEGORY_REQUEST:
+    case types.POST_CATEGORY_REQUEST:
       return { ...state, loading: true };
-    case types.CREATE_CATEGORY_SUCCESS:
+    case types.POST_CATEGORY_SUCCESS:
       return { ...state, loading: false };
     case types.GET_CATEGORY_SUCCESS:
       return {
         ...state,
-        categories: payload.categories,
-        totalPageNum: payload.totalPages,
+        categories: payload,
         loading: false,
       };
     case types.GET_SINGLE_CATEGORY_SUCCESS:
@@ -31,8 +31,8 @@ const categoryReducer = (state = initialState, action) => {
       };
 
     case types.GET_CATEGORY_FAILURE:
-    case types.GET_SINGLE_CATEGORY_REQUEST_FAILURE:
-    case types.CREATE_CATEGORY_FAILURE:
+    case types.GET_SINGLE_CATEGORY_FAILURE:
+    case types.POST_CATEGORY_FAILURE:
       return { ...state, submitLoading: false };
     default:
       return state;

@@ -1,5 +1,4 @@
 import React from "react";
-import { useState } from "react";
 import "antd/dist/antd.css";
 import { Layout, Menu } from "antd";
 import { MDBIcon } from "mdb-react-ui-kit";
@@ -10,14 +9,9 @@ const { Content, Sider } = Layout;
 const { SubMenu } = Menu;
 
 const SignupSideBar = () => {
-  const [collapsed, setCollapsed] = useState(false);
   return (
     <Layout style={{ minHeight: "100vh" }}>
-      <Sider
-        collapsible
-        collapsed={collapsed}
-        onCollapse={() => setCollapsed(!collapsed)}
-      >
+      <Sider>
         <div className="logo" />
         <Menu theme="dark" defaultSelectedKeys={["1"]} mode="inline">
           <SubMenu key="sub1" title="Country">
@@ -63,9 +57,9 @@ const SignupSideBar = () => {
             style={{ padding: 24, minHeight: 360 }}
           >
             <SignupForm />
-            <Footer />
           </div>
         </Content>
+        <Footer />
       </Layout>
     </Layout>
   );

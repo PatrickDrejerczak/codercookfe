@@ -11,15 +11,14 @@ const ingredientReducer = (state = initialState, action) => {
   switch (type) {
     case types.GET_INGREDIENT_REQUEST:
     case types.GET_SINGLE_INGREDIENT_REQUEST:
-    case types.CREATE_INGREDIENT_REQUEST:
+    case types.POST_INGREDIENT_REQUEST:
       return { ...state, loading: true };
-    case types.CREATE_INGREDIENT_SUCCESS:
+    case types.POST_INGREDIENT_SUCCESS:
       return { ...state, loading: false };
     case types.GET_INGREDIENT_SUCCESS:
       return {
         ...state,
-        ingredients: payload.ingredients,
-        totalPageNum: payload.totalPages,
+        ingredients: payload,
         loading: false,
       };
     case types.GET_SINGLE_INGREDIENT_SUCCESS:
@@ -31,8 +30,8 @@ const ingredientReducer = (state = initialState, action) => {
       };
 
     case types.GET_INGREDIENT_FAILURE:
-    case types.GET_SINGLE_INGREDIENT_REQUEST_FAILURE:
-    case types.CREATE_INGREDIENT_FAILURE:
+    case types.GET_SINGLE_INGREDIENT_FAILURE:
+    case types.POST_INGREDIENT_FAILURE:
       return { ...state, submitLoading: false };
     default:
       return state;

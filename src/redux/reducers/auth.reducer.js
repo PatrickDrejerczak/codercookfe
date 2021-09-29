@@ -1,10 +1,13 @@
 import * as types from "../constants/auth.constant";
 const isAuthenticated = !!localStorage.getItem("accessToken");
+const role = localStorage.getItem("role");
 const initialState = {
   user: {},
   accessToken: localStorage.getItem("accessToken"),
   loading: false,
   isAuthenticated: isAuthenticated,
+  role: role,
+  users: [],
 };
 
 const authReducer = (state = initialState, action) => {
@@ -12,11 +15,10 @@ const authReducer = (state = initialState, action) => {
 
   switch (type) {
     case types.LOGIN_REQUEST:
-    case types.LOGIN_FACEBOOK_REQUEST:
-    case types.LOGIN_GOOGLE_REQUEST:
     case types.REGISTER_REQUEST:
     case types.GET_CURRENT_USER_REQUEST:
-    case types.UPDATE_PROFILE_REQUEST:
+    case types.GET_ALL_USER_REQUEST:
+    case types.PUT_PROFILE_REQUEST:
     case types.REGISTER_SUCCESS:
       return {
         ...state,
@@ -24,20 +26,18 @@ const authReducer = (state = initialState, action) => {
       };
 
     case types.LOGIN_SUCCESS:
-      return { ...state, isAuthenticated: true };
-    case types.LOGIN_FACEBOOK_SUCCESS:
-    case types.LOGIN_GOOGLE_SUCCESS:
+      return { ...state, isAuthenticated: true, role: payload.user.role };
     case types.LOGIN_FAILURE:
-    case types.LOGIN_FACEBOOK_FAILURE:
-    case types.LOGIN_GOOGLE_FAILURE:
     case types.GET_CURRENT_USER_FAILURE:
+      return state;
+    case types.GET_ALL_USER_FAILURE:
       return { ...state, loading: false, isAuthenticated: false };
 
-    case types.UPDATE_PROFILE_SUCCESS:
+    case types.PUT_PROFILE_SUCCESS:
       return { ...state, loading: false, user: { ...state.user, payload } };
 
     case types.REGISTER_FAILURE:
-    case types.UPDATE_PROFILE_FAILURE:
+    case types.PUT_PROFILE_FAILURE:
       return { ...state, loading: false };
 
     case types.GET_CURRENT_USER_SUCCESS:
@@ -46,8 +46,15 @@ const authReducer = (state = initialState, action) => {
         user: payload,
         loading: false,
         isAuthenticated: true,
+        role: payload.role,
       };
-
+    case types.GET_ALL_USER_SUCCESS:
+      return {
+        ...state,
+        users: payload,
+        loading: false,
+        isAuthenticated: true,
+      };
     case types.LOGOUT:
       return {
         ...state,
