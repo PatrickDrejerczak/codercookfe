@@ -1,6 +1,8 @@
 import React from "react";
 import { Switch, Route } from "react-router-dom";
 import AdminPage from "./pages/AdminPage";
+import AOS from "aos";
+import "aos/dist/aos.css";
 import HomePage from "./pages/HomePage";
 import CategoryPage from "./pages/CategoryPage";
 import RecipeDetailPage from "./pages/RecipeDetailPage";
@@ -36,6 +38,14 @@ import {
   faChartLine,
   faSignOutAlt,
   faSignInAlt,
+  faSearch,
+  faBreadSlice,
+  faCarrot,
+  faCommentAlt,
+  faUtensils,
+  faBook,
+  faFireAlt,
+  faPlusSquare,
 } from "@fortawesome/free-solid-svg-icons";
 
 import { fab } from "@fortawesome/free-brands-svg-icons";
@@ -61,10 +71,19 @@ library.add(
   faRegistered,
   faChartLine,
   faSignOutAlt,
-  faSignInAlt
+  faSignInAlt,
+  faSearch,
+  faUtensils,
+  faBook,
+  faBreadSlice,
+  faCarrot,
+  faCommentAlt,
+  faFireAlt,
+  faPlusSquare
 );
 
 function App() {
+  AOS.init();
   const dispatch = useDispatch();
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   useEffect(() => {

@@ -29,7 +29,7 @@ const ImgUploadButton = () => {
         id="upload_widget"
         className="cloudinary-button"
       >
-        Upload files
+        Upload Picture
       </Button>
 
       <img

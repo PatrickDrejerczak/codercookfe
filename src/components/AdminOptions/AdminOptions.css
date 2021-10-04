@@ -1,0 +1,15 @@
+.adminButton {
+  display: flex;
+  justify-content: flex-start;
+  text-align: end;
+}
+
+.reihe {
+  display: flex;
+  justify-content: space-between;
+}
+
+.adminPress {
+  background-color: #71bc78 !important;
+  margin-left: 10px;
+}

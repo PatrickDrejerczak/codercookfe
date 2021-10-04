@@ -1,6 +1,8 @@
 .detailFooter {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
+  align-items: center;
+  align-content: center;
   padding-top: 5vh;
   padding-bottom: 3vh;
 }
@@ -9,7 +11,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 65vw;
+  width: 55vw;
   margin-top: 3vh;
 }
 
@@ -32,6 +34,98 @@
 }
 
 .detailInstruction {
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   padding-top: 1vh;
+}
+
+.kopf {
+  font-size: 1.5rem;
+  background-color: #71bc78 !important;
+  text-align: center;
+}
+
+.detailRow {
+  font-size: 1.1rem !important;
+  font-weight: 600;
+}
+
+.table-striped > tbody > tr:nth-child(2n + 1) > td,
+.table-striped > tbody > tr:nth-child(2n + 1) > th {
+  background-color: #c68a57;
+}
+
+.table-striped > tbody > tr:nth-child(2n) > td,
+.table-striped > tbody > tr:nth-child(2n) > th {
+  background-color: #efbc90;
+}
+
+.detailImage {
+  height: 70vh;
+}
+
+.ds-btn-primary {
+  border-radius: 22px;
+  font-weight: 600;
+  background-color: #ff6067 !important;
+}
+
+.ds-btn {
+  border: 2px solid transparent;
+}
+
+.rds-save-recipe-btn {
+  margin-left: 8px;
+}
+
+.ds-btn-icon {
+  padding: 0 12px;
+}
+
+.ds-btn-primary {
+  box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.3);
+  color: #fff;
+}
+
+.ds-btn {
+  box-sizing: border-box;
+  font-family: inherit;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 25px;
+  min-height: 40px;
+  letter-spacing: 0.5px;
+  line-height: 40px;
+  min-width: 40px;
+}
+
+.rds-save-recipe-btn {
+  display: flex;
+  justify-content: space-between;
+  width: 7vw;
+  font-size: 17px;
+  align-items: center;
+}
+
+.buttonRecipeGroup {
+  display: flex;
+  justify-content: space-between;
+  width: 20vw;
+  align-items: center;
+  align-content: center;
+}
+
+.heartIcon {
+  height: 50px;
+  width: 50px;
+  z-index: 1;
+}
+
+.footerButton {
+  font-size: 17px;
+}
+
+.updateButton {
+  margin-right: 30vw;
 }

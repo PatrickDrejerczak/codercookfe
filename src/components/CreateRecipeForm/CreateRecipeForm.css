@@ -16,12 +16,12 @@
 
 .form-control {
   border: 1.5px solid #71bc78;
-  height: 6vh;
+  height: 7vh;
 }
 
 .form-select {
   border: 1.5px solid #71bc78;
-  height: 6vh;
+  height: 7vh;
 }
 
 .createRecipeTitle {
@@ -34,12 +34,18 @@
 
 .createRecipeText {
   font-size: 1.5rem;
+  display: flex;
+  justify-content: flex-start;
+  align-content: center;
+  align-items: center;
+  padding-top: 5px;
 }
 
 .addButton {
   margin-bottom: 0.5rem;
   width: 5vw;
   background-color: #71bc78;
+  font-size: 15px;
 }
 
 .createRecipeCard {
@@ -51,4 +57,39 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.form-select {
+  border-top: none;
+  border-left: none;
+  border-right: none;
+}
+
+.form-control:focus {
+  border-color: #267825 !important;
+  -webkit-box-shadow: none !important;
+  box-shadow: none !important;
+}
+
+.form-select:focus {
+  border-color: #267825;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+.formBox:focus {
+  border-color: #267825 !important;
+  -webkit-box-shadow: none !important;
+  box-shadow: none !important;
+}
+
+.textarea:focus {
+  border-color: #267825 !important;
+  -webkit-box-shadow: none !important;
+  box-shadow: none !important;
+}
+
+#formBasicEmail {
+  border-top: none !important;
+  border-left: none !important;
+  border-right: none !important;
 }

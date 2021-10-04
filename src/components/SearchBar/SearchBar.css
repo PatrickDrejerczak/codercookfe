@@ -1,7 +1,37 @@
 #searchBar {
-  margin-left: 50vw;
+  margin-left: 5vw;
+  width: 30vw;
+  margin-top: 1vh;
 }
 
 #button-addon1 {
   background-color: black;
+}
+.search-drop-down {
+  position: absolute;
+  background-color: none;
+  top: 2.5rem;
+  left: 0;
+  width: 100%;
+  z-index: 1;
+}
+.input-wrapper {
+  position: relative;
+  display: flex;
+}
+
+a {
+  color: black;
+}
+
+a:hover {
+  color: #267825;
+}
+
+.searchIcon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  margin-top: 15px;
 }

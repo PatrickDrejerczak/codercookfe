@@ -10,6 +10,7 @@ const CategoryRender = () => {
   return (
     <div className="row-wrapper">
       <Row>
+        <h1>Search Results</h1>
         <CardGroup>
           {recipes.length ? (
             recipes.map((recipe) => <RecipeCard recipe={recipe} />)

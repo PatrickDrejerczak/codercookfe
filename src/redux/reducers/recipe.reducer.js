@@ -9,12 +9,16 @@ const initialState = {
   selectedId: null,
   urlToImage: "",
   recipeByUserId: [],
+  favorites: [],
+  searchRecipes: [],
+  match: [],
 };
 
 const recipeReducer = (state = initialState, action) => {
   const { type, payload } = action;
   switch (type) {
     case types.GET_RECIPE_REQUEST:
+    case types.PUT_ADD_FAVORITE_REQUEST:
     case types.GET_SINGLE_RECIPE_REQUEST:
     case types.GET_MATCH_REQUEST:
     case types.GET_RECIPE_BY_CATEGORY_REQUEST:
@@ -25,6 +29,8 @@ const recipeReducer = (state = initialState, action) => {
       return { ...state, loading: false };
     case types.GET_RECIPE_BY_CATEGORY_SUCCESS:
       return { ...state, recipeByCategory: payload };
+    case types.PUT_ADD_FAVORITE_SUCCESS:
+      return { ...state, favorites: payload };
     case types.GET_RECIPE_BY_USER_ID_SUCCESS:
       return { ...state, recipeByUserId: payload };
     case types.GET_RECIPE_SUCCESS:
@@ -44,8 +50,19 @@ const recipeReducer = (state = initialState, action) => {
         ...state,
         selectedId: payload,
       };
+    case types.SEARCH_RECIPE:
+      return {
+        ...state,
+        searchRecipes: payload,
+      };
+    case types.GET_MATCH_SUCCESS:
+      return {
+        ...state,
+        match: payload,
+      };
 
     case types.GET_RECIPE_FAILURE:
+    case types.PUT_ADD_FAVORITE_FAILURE:
     case types.GET_RECIPE_BY_CATEGORY_FAILURE:
     case types.GET_RECIPE_BY_USER_ID_FAILURE:
     case types.GET_SINGLE_RECIPE_FAILURE:

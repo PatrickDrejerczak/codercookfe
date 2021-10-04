@@ -26,7 +26,12 @@ const authReducer = (state = initialState, action) => {
       };
 
     case types.LOGIN_SUCCESS:
-      return { ...state, isAuthenticated: true, role: payload.user.role };
+      return {
+        ...state,
+        isAuthenticated: true,
+        user: { ...state.user, payload },
+        role: payload.user.role,
+      };
     case types.LOGIN_FAILURE:
     case types.GET_CURRENT_USER_FAILURE:
       return state;

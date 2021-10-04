@@ -67,7 +67,7 @@ const SignupForm = () => {
             </p>
           </div>
           <Form onSubmit={handleSubmit}>
-            <Form.Group>
+            <Form.Group className="signUpInput">
               <div className="text-center">
                 {formData.avatarUrl && (
                   <div className="mb-3">
@@ -80,7 +80,7 @@ const SignupForm = () => {
                 )}
               </div>
             </Form.Group>
-            <Form.Group>
+            <Form.Group className="signUpInput">
               <Form.Control
                 type="text"
                 placeholder="Name"
@@ -92,7 +92,7 @@ const SignupForm = () => {
                 <small className="form-text text-danger">{errors.name}</small>
               )}
             </Form.Group>
-            <Form.Group>
+            <Form.Group className="signUpInput">
               <Form.Control
                 type="email"
                 placeholder="Email Address"
@@ -104,7 +104,7 @@ const SignupForm = () => {
                 <small className="form-text text-danger">{errors.email}</small>
               )}
             </Form.Group>
-            <Form.Group>
+            <Form.Group className="signUpInput">
               <Form.Control
                 type="password"
                 placeholder="Password"
@@ -118,7 +118,7 @@ const SignupForm = () => {
                 </small>
               )}
             </Form.Group>
-            <Form.Group>
+            <Form.Group className="signUpInput">
               <Form.Control
                 type="password"
                 placeholder="Confirm Password"

@@ -1,14 +1,15 @@
 import React from "react";
 import "antd/dist/antd.css";
 import { Layout, Menu } from "antd";
-import CategoryRender from "../CategoryRender/CategoryRender";
 import { MDBIcon } from "mdb-react-ui-kit";
+import Footer from "../Footer/Footer";
 import { Link } from "react-router-dom";
+import UserProfileRender from "../UserProfileRender/UserProfileRender";
 
 const { Content, Sider } = Layout;
 const { SubMenu } = Menu;
 
-const CategorySidebar = () => {
+const UserSideBar = () => {
   return (
     <Layout style={{ minHeight: "100vh" }}>
       <Sider>
@@ -76,12 +77,14 @@ const CategorySidebar = () => {
             className="site-layout-background"
             style={{ padding: 24, minHeight: 360 }}
           >
-            <CategoryRender />
+            <UserProfileRender />
           </div>
         </Content>
+
+        <Footer />
       </Layout>
     </Layout>
   );
 };
 
-export default CategorySidebar;
+export default UserSideBar;
