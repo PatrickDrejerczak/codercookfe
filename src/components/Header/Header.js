@@ -9,13 +9,19 @@ import { useDispatch } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import logo from "./logo.png";
+import Fridge from "../Fridge/Fridge";
 
 const Header = () => {
+  const [modalShow, setModalShow] = React.useState(false);
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   const role = useSelector((state) => state.auth.role);
   const dispatch = useDispatch();
   const handleLogout = () => {
     dispatch(authActions.logout());
+  };
+
+  const handleOnClick = () => {
+    setModalShow(true);
   };
 
   const authLinks = (
@@ -32,12 +38,10 @@ const Header = () => {
       >
         Create Recipe
       </Nav.Link>
-      <Nav.Link
-        href="http://localhost:3000/fridge"
-        className="headerLink navLink"
-      >
+      <Nav.Link className="navLink" onClick={handleOnClick}>
         What´s in your Fridge?
       </Nav.Link>
+      <Fridge show={modalShow} onHide={() => setModalShow(false)} />
       {/* <Nav.Link as={Link} to={`/user/profile/${userId}`}>
         <FontAwesomeIcon icon="chart-line" size="sm" /> User Profile
       </Nav.Link> */}
@@ -74,9 +78,10 @@ const Header = () => {
       <Nav.Link as={Link} to="/login" className="headerLink navLink">
         <FontAwesomeIcon icon="sign-in-alt" size="sm" /> Login
       </Nav.Link>
-      <Nav.Link href="http://localhost:3000/fridge" className="navLink">
+      <Nav.Link className="navLink" onClick={handleOnClick}>
         What´s in your Fridge?
       </Nav.Link>
+      <Fridge show={modalShow} onHide={() => setModalShow(false)} />
       <SearchBar />
     </Nav>
   );

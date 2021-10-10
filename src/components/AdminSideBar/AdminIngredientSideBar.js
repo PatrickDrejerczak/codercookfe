@@ -6,12 +6,12 @@ import Footer from "../Footer/Footer";
 
 import { Link } from "react-router-dom";
 
-import AdminUser from "../AdminOptions/AdminUser";
+import AdminIngredients from "../AdminOptions/AdminIngredients";
 
 const { Content, Sider } = Layout;
 const { SubMenu } = Menu;
 
-const AdminSideBar = () => {
+const AdminIngredientSideBar = () => {
   return (
     <Layout style={{ minHeight: "100vh" }}>
       <Sider>
@@ -39,7 +39,7 @@ const AdminSideBar = () => {
             className="site-layout-background"
             style={{ padding: 24, minHeight: 360 }}
           >
-            <AdminUser />
+            <AdminIngredients />
           </div>
         </Content>
 
@@ -49,4 +49,4 @@ const AdminSideBar = () => {
   );
 };
 
-export default AdminSideBar;
+export default AdminIngredientSideBar;

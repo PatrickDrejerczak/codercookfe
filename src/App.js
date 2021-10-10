@@ -50,6 +50,11 @@ import {
 
 import { fab } from "@fortawesome/free-brands-svg-icons";
 import UserPage from "./pages/UserPage";
+import AdminUserPage from "./pages/AdminUserPage";
+import AdminCategoryPage from "./pages/AdminCategoryPage";
+import AdminIngredientsPage from "./pages/AdminIngredientsPage";
+import AdminRecipePage from "./pages/AdminRecipePage";
+import FridgePage from "./pages/FridgePage";
 
 library.add(
   fab,
@@ -107,12 +112,30 @@ function App() {
           <Header />
           <Switch>
             <Route path="/" exact component={HomePage} />
+            <Route path="/recipe/match" exact component={FridgePage} />
             <Route path="/category/:name" exact component={CategoryPage} />
             <Route path="/recipe/:id" exact component={RecipeDetailPage} />
             <Route path="/signup" exact component={SignupPage} />
             <Route path="/login" exact component={LoginPage} />
             <Route path="/create" exact component={CreateRecipePage} />
             <Route path="/user/:id" exact component={UserPage} />
+
+            <Route path="/admin/useroption" exact component={AdminUserPage} />
+            <Route
+              path="/admin/recipeoption"
+              exact
+              component={AdminRecipePage}
+            />
+            <Route
+              path="/admin/ingredientsoption"
+              exact
+              component={AdminIngredientsPage}
+            />
+            <Route
+              path="/admin/categoryoption"
+              exact
+              component={AdminCategoryPage}
+            />
             <Route path="/admin/:id" exact component={AdminPage} />
           </Switch>
         </div>

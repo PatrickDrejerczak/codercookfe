@@ -1,35 +1,100 @@
-import React from "react";
-import "./Fridge.css";
+import React, { useState, useEffect } from "react";
+import { Modal, Button, InputGroup, Form } from "react-bootstrap";
+import { useSelector, useDispatch } from "react-redux";
+import ingredientActions from "../../redux/actions/ingredient.action";
+import recipeActions from "../../redux/actions/recipe.action";
+import { routeActions } from "../../redux/actions/route.action";
+import { useHistory } from "react-router";
 
-const Fridge = () => {
+const Fridge = (props) => {
+  const dispatch = useDispatch();
+  const history = useHistory();
+  const redirectTo = useSelector((state) => state.route.redirectTo);
+  const ingredients = useSelector((state) => state.ingredient.ingredients);
+
+  const [inputArr, setInputArr] = useState([{ ingredient: "" }]);
+  const handleOnClick = () => {
+    setInputArr([...inputArr, { ingredient: "" }]);
+  };
+
+  const handleIngredient = (e) => {
+    let newArr = inputArr;
+    console.log(e.target.value);
+    const { index1, ingredient } = JSON.parse(e.target.value); // {"ingredient": Object, index1: 1}
+    newArr[index1].ingredient = ingredient._id;
+    setInputArr(newArr);
+  };
+
+  const handleSubmit = () => {
+    const formData = inputArr.map((input) => input.ingredient);
+    dispatch(recipeActions.match(formData));
+  };
+
+  useEffect(() => {
+    dispatch(ingredientActions.getAllIngredients());
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (redirectTo) {
+      if (redirectTo === "__GO_BACK__") {
+        history.goBack();
+        dispatch(routeActions.removeRedirectTo());
+      } else {
+        history.push(redirectTo);
+        dispatch(routeActions.removeRedirectTo());
+      }
+    }
+  }, [dispatch, history, redirectTo]);
+
   return (
-    <div>
-      <div class="section full-height">
-        <input
-          class="modal-btn"
-          type="checkbox"
-          id="modal-btn"
-          name="modal-btn"
-        />
-        <label for="modal-btn">
-          Open Modal <i class="uil uil-expand-arrows"></i>
-        </label>
-        <div class="modal">
-          <div class="modal-wrap">
-            <img src="https://assets.codepen.io/1462889/sl3.jpg" alt="" />
-            <p>
-              Contrary to popular belief, Lorem Ipsum is not simply random text.
-              It has roots in a piece of classical Latin literature from 45 BC,
-              making it over 2000 years old.
-            </p>
+    <Modal
+      {...props}
+      size="lg"
+      aria-labelledby="contained-modal-title-vcenter"
+      centered
+    >
+      <Modal.Header closeButton>
+        <Modal.Title id="contained-modal-title-vcenter">
+          What´s in YOUR Fridge?
+        </Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        {inputArr.map((i, index1) => (
+          <div>
+            <InputGroup className="formBox">
+              <Form.Select
+                aria-label="Default select example"
+                onChange={(e) => handleIngredient(e)}
+              >
+                <option>Select Ingredients</option>
+                {ingredients.map((ingredient, index) => (
+                  <option
+                    value={JSON.stringify({
+                      ingredient: ingredient,
+                      index1: index1,
+                    })}
+                  >
+                    {ingredient.name}
+                  </option>
+                ))}
+              </Form.Select>
+            </InputGroup>
           </div>
-        </div>
-
-        <a href="https://front.codes/" class="logo" target="me">
-          <img src="https://assets.codepen.io/1462889/fcy.png" alt="" />
-        </a>
-      </div>
-    </div>
+        ))}
+        <Button className="addButton" variant="success" onClick={handleOnClick}>
+          +
+        </Button>
+      </Modal.Body>
+      <Modal.Footer>
+        <Button
+          className="submitButton"
+          variant="success"
+          onClick={handleSubmit}
+        >
+          Submit
+        </Button>
+      </Modal.Footer>
+    </Modal>
   );
 };
 

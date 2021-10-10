@@ -11,7 +11,7 @@ import AdminUser from "../AdminOptions/AdminUser";
 const { Content, Sider } = Layout;
 const { SubMenu } = Menu;
 
-const AdminSideBar = () => {
+const AdminUserSideBar = () => {
   return (
     <Layout style={{ minHeight: "100vh" }}>
       <Sider>
@@ -49,4 +49,4 @@ const AdminSideBar = () => {
   );
 };
 
-export default AdminSideBar;
+export default AdminUserSideBar;

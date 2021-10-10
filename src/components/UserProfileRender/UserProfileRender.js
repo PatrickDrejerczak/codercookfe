@@ -1,86 +1,72 @@
 import React, { useEffect } from "react";
-import recipeActions from "../../redux/actions/recipe.action";
 import { authActions } from "../../redux/actions/auth.action";
 import { useSelector, useDispatch } from "react-redux";
-import { Row, Table, Button } from "react-bootstrap";
+import { Row, CardGroup, Col } from "react-bootstrap";
+
+import RecipeCard from "../RecipeCard/RecipeCard";
+import AvatarUploadButton from "../AvatarUploadButton/AvatarUploadButton";
+import recipeActions from "../../redux/actions/recipe.action";
 
 const UserProfileRender = () => {
   const dispatch = useDispatch();
-  const recipes = useSelector((state) => state.recipe.recipes);
   const user = useSelector((state) => state.auth.user);
+  const recipe = useSelector((state) => state.recipe.recipeByUserId);
 
   useEffect(() => {
     dispatch(authActions.getCurrentUser());
-    dispatch(recipeActions.getAllRecipes());
-  }, [dispatch]);
+    if (user._id) {
+      dispatch(recipeActions.getRecipeByUserId({ userId: user._id }));
+    }
+  }, [dispatch, user._id]);
+
+  console.log(recipe);
 
   return (
-    <div className="row-wrapper">
-      <Row>
-        <h1>Favorites</h1>
-        <Table striped bordered hover size="sm">
-          <thead>
-            <tr>
-              <th className="kopf">Recipes</th>
-            </tr>
-          </thead>
-          <tbody>
-            {recipes.length ? (
-              recipes.map((recipes) => (
-                <tr>
-                  <div>
-                    <td className="reihe">
-                      {recipes.favorites}{" "}
-                      <div className="adminButton">
-                        <Button variant="success" className="adminPress">
-                          Edit
-                        </Button>
-                        <Button variant="success" className="adminPress">
-                          Delete
-                        </Button>
-                      </div>
-                    </td>
-                  </div>
-                </tr>
+    <div>
+      <div className="userProfileSettings">
+        <div className="settings">
+          <h1>Hello, {user.name}</h1>
+          <img src={user.avatarUrl} alt={user.name} />
+          <br />
+          <br />
+          <AvatarUploadButton />
+          <br />
+        </div>
+      </div>
+      <h1>My Recipes</h1>
+      <div className="row-wrapper">
+        <Row>
+          <CardGroup>
+            {recipe?.length ? (
+              recipe.map((r) => (
+                <Col sm={3}>
+                  <RecipeCard recipe={r} />
+                </Col>
               ))
             ) : (
               <h1>Loading...</h1>
             )}
-          </tbody>
-        </Table>
-        <h1>User Name</h1>
-        <Table striped bordered hover size="sm">
-          <thead>
-            <tr>
-              <th className="kopf">Recipes</th>
-            </tr>
-          </thead>
-          <tbody>
-            {user.length ? (
-              user.map((user) => (
-                <tr>
-                  <div>
-                    <td className="reihe">
-                      {user.name}{" "}
-                      <div className="adminButton">
-                        <Button variant="success" className="adminPress">
-                          Edit
-                        </Button>
-                        <Button variant="success" className="adminPress">
-                          Delete
-                        </Button>
-                      </div>
-                    </td>
-                  </div>
-                </tr>
+          </CardGroup>
+        </Row>
+      </div>
+      <br />
+      <h1>Favorites</h1>
+      <br />
+      <div className="row-wrapper">
+        <Row>
+          <CardGroup>
+            {user.favorites?.length ? (
+              user.favorites.map((favorites) => (
+                <Col sm={3}>
+                  <RecipeCard recipe={favorites} />
+                </Col>
               ))
             ) : (
               <h1>Loading...</h1>
             )}
-          </tbody>
-        </Table>
-        <h1>{user.name}</h1>
-      </Row>
+          </CardGroup>
+        </Row>
+      </div>
     </div>
   );
 };

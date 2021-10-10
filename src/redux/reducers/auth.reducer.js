@@ -8,6 +8,8 @@ const initialState = {
   isAuthenticated: isAuthenticated,
   role: role,
   users: [],
+  avatarUrl: "",
+  userById: {},
 };
 
 const authReducer = (state = initialState, action) => {
@@ -18,7 +20,10 @@ const authReducer = (state = initialState, action) => {
     case types.REGISTER_REQUEST:
     case types.GET_CURRENT_USER_REQUEST:
     case types.GET_ALL_USER_REQUEST:
+    case types.GET_USER_BY_ID_REQUEST:
     case types.PUT_PROFILE_REQUEST:
+    case types.DELETE_USER_REQUEST:
+      return { ...state, loading: true };
     case types.REGISTER_SUCCESS:
       return {
         ...state,
@@ -29,14 +34,24 @@ const authReducer = (state = initialState, action) => {
       return {
         ...state,
         isAuthenticated: true,
-        user: { ...state.user, payload },
+        user: payload,
         role: payload.user.role,
+      };
+    case types.DELETE_USER_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        users: [...state.users.filter((user) => user._id !== payload.userId)],
       };
     case types.LOGIN_FAILURE:
     case types.GET_CURRENT_USER_FAILURE:
       return state;
+    case types.GET_USER_BY_ID_FAILURE:
+      return state;
     case types.GET_ALL_USER_FAILURE:
       return { ...state, loading: false, isAuthenticated: false };
+    case types.DELETE_USER_FAILURE:
+      return { ...state, loading: false };
 
     case types.PUT_PROFILE_SUCCESS:
       return { ...state, loading: false, user: { ...state.user, payload } };
@@ -52,6 +67,12 @@ const authReducer = (state = initialState, action) => {
         loading: false,
         isAuthenticated: true,
         role: payload.role,
+      };
+    case types.GET_USER_BY_ID_SUCCESS:
+      return {
+        ...state,
+        userById: payload,
+        loading: false,
       };
     case types.GET_ALL_USER_SUCCESS:
       return {

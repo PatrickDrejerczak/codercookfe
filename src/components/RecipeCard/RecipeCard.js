@@ -13,6 +13,7 @@ const RecipeCard = ({ recipe }) => {
   const dispatch = useDispatch();
   const handleOnClick = () => {
     setModalShow(true);
+    dispatch(recipeActions.getSingleRecipe({ id: recipe._id }));
     dispatch(recipeActions.selectedId({ id: recipe._id }));
   };
   useEffect(() => {

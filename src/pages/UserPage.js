@@ -1,10 +1,10 @@
 import React from "react";
-import UserProfileRender from "../components/UserProfileRender/UserProfileRender";
+import UserSideBar from "../components/UserSideBar/UserSideBar";
 
 const UserPage = () => {
   return (
     <div>
-      <UserProfileRender />
+      <UserSideBar />
     </div>
   );
 };

@@ -11,7 +11,8 @@ const initialState = {
   recipeByUserId: [],
   favorites: [],
   searchRecipes: [],
-  match: [],
+  inputArr: [],
+  formData: [],
 };
 
 const recipeReducer = (state = initialState, action) => {
@@ -20,13 +21,16 @@ const recipeReducer = (state = initialState, action) => {
     case types.GET_RECIPE_REQUEST:
     case types.PUT_ADD_FAVORITE_REQUEST:
     case types.GET_SINGLE_RECIPE_REQUEST:
+    case types.GET_FAVORITES_REQUEST:
     case types.GET_MATCH_REQUEST:
     case types.GET_RECIPE_BY_CATEGORY_REQUEST:
     case types.GET_RECIPE_BY_USER_ID_REQUEST:
+    case types.GET_FAVORITES_SUCCESS:
+      return { ...state, loading: true, favorites: payload };
     case types.POST_RECIPE_REQUEST:
       return { ...state, loading: true };
     case types.POST_RECIPE_SUCCESS:
-      return { ...state, loading: false };
+      return { ...state, loading: false, formData: payload };
     case types.GET_RECIPE_BY_CATEGORY_SUCCESS:
       return { ...state, recipeByCategory: payload };
     case types.PUT_ADD_FAVORITE_SUCCESS:
@@ -58,7 +62,7 @@ const recipeReducer = (state = initialState, action) => {
     case types.GET_MATCH_SUCCESS:
       return {
         ...state,
-        match: payload,
+        inputArr: payload,
       };
 
     case types.GET_RECIPE_FAILURE:
@@ -67,6 +71,8 @@ const recipeReducer = (state = initialState, action) => {
     case types.GET_RECIPE_BY_USER_ID_FAILURE:
     case types.GET_SINGLE_RECIPE_FAILURE:
     case types.GET_MATCH_FAILURE:
+      return { ...state, loading: false };
+    case types.GET_FAVORITES_FAILURE:
       return { ...state, loading: false };
     case types.POST_RECIPE_FAILURE:
       return { ...state, submitLoading: false };

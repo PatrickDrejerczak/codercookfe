@@ -6,7 +6,7 @@ import api from "../api";
 const getAllRecipes = () => async (dispatch) => {
   dispatch({ type: types.GET_RECIPE_REQUEST, payload: null });
   try {
-    const data = await api.get(`recipe`);
+    const data = await api.get(`recipe?limit=4`);
 
     dispatch({
       type: types.GET_RECIPE_SUCCESS,
@@ -18,12 +18,27 @@ const getAllRecipes = () => async (dispatch) => {
   }
 };
 
+const getFavorites = () => async (dispatch) => {
+  dispatch({ type: types.GET_FAVORITES_REQUEST, payload: null });
+  try {
+    const data = await api.get(`recipe`);
+
+    dispatch({
+      type: types.GET_FAVORITES_SUCCESS,
+      payload: data.data.data.favorites,
+    });
+  } catch (error) {
+    toast.error(error.message);
+    dispatch({ type: types.GET_FAVORITES_FAILURE, payload: error });
+  }
+};
+
 const getSingleRecipe =
   ({ id }) =>
   async (dispatch) => {
     dispatch({ type: types.GET_SINGLE_RECIPE_REQUEST, payload: null });
     try {
-      const data = await api.get(`recipe/${id}`);
+      const data = await api.get(`recipe/${id}?limit=4`);
 
       dispatch({
         type: types.GET_SINGLE_RECIPE_SUCCESS,
@@ -87,11 +102,12 @@ const createRecipe = (formData) => async (dispatch) => {
       type: types.POST_RECIPE_SUCCESS,
       payload: res.data.data,
     });
-    dispatch(recipeActions.recipeRequest({ pageNum: 1 }));
-    dispatch(routeActions.redirect("__GO_BACK__"));
-    toast.success("New product has been created!");
+    // dispatch(recipeActions.recipeRequest({ pageNum: 1 }));
+    dispatch(routeActions.redirect(`/recipe/${res.data.data.recipes._id}`));
+    toast.success("New recipe has been created!");
   } catch (err) {
     dispatch({ type: types.POST_RECIPE_FAILURE, payload: err });
+    toast.error("Input missing!");
   }
 };
 
@@ -131,7 +147,7 @@ const addFavorite =
       );
     } catch (err) {
       dispatch({ type: types.PUT_ADD_FAVORITE_FAILURE, payload: err });
-      toast.error("Something went wrong");
+      toast.error("Recipe already favored");
     }
   };
 
@@ -156,13 +172,17 @@ const deleteRecipe =
 const match = (inputArr) => async (dispatch) => {
   dispatch({ type: types.GET_MATCH_REQUEST, payload: null });
   try {
-    const res = await api.post("recipe/match/", inputArr);
+    console.log(inputArr);
+    const res = await api.post("recipe/match/", { inputArr });
     console.log("success", res);
+
     dispatch({
       type: types.GET_MATCH_SUCCESS,
       payload: res.data.data,
     });
     //redirect to new page here when succes
+    toast.success("Recipes have been matched successfully!");
+    dispatch(routeActions.redirect(`/recipe/match`));
   } catch (error) {
     toast.error(error.message);
     dispatch({ type: types.GET_MATCH_FAILURE, payload: error });
@@ -203,5 +223,6 @@ const recipeActions = {
   getRecipeByUserId,
   addFavorite,
   searchRecipe,
+  getFavorites,
 };
 export default recipeActions;

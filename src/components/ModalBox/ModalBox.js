@@ -1,4 +1,3 @@
-import React from "react";
 import { Modal, Button, Table } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
@@ -31,7 +30,9 @@ const ModalBox = (props) => {
             {recipe.ingredients?.map((ingredient) => (
               <tr>
                 <td className="detailRow">{ingredient.ingredient.name}</td>
-                <td className="detailRow">{ingredient.quantity}</td>
+                <td className="detailRow">
+                  {ingredient.quantity} {ingredient.ingredient.unit}
+                </td>
               </tr>
             ))}
           </tbody>

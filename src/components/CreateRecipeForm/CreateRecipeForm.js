@@ -15,6 +15,8 @@ import categoryActions from "../../redux/actions/category.action";
 import recipeActions from "../../redux/actions/recipe.action";
 import "./CreateRecipeForm.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { routeActions } from "../../redux/actions/route.action";
+import { useHistory } from "react-router";
 
 const CreateRecipeForm = () => {
   const dispatch = useDispatch();
@@ -25,7 +27,8 @@ const CreateRecipeForm = () => {
   const ingredients = useSelector((state) => state.ingredient.ingredients);
   const categories = useSelector((state) => state.category.categories);
   const urlToImage = useSelector((state) => state.recipe.urlToImage);
-
+  const redirectTo = useSelector((state) => state.route.redirectTo);
+  const history = useHistory();
   const [inputArr, setInputArr] = useState([{ ingredient: "", quantity: "" }]);
   const handleOnClick = () => {
     setInputArr([...inputArr, { ingredient: "", quantity: "" }]);
@@ -85,6 +88,18 @@ const CreateRecipeForm = () => {
     dispatch(categoryActions.getAllCategories());
   }, [dispatch]);
 
+  useEffect(() => {
+    if (redirectTo) {
+      if (redirectTo === "__GO_BACK__") {
+        history.goBack();
+        dispatch(routeActions.removeRedirectTo());
+      } else {
+        history.push(redirectTo);
+        dispatch(routeActions.removeRedirectTo());
+      }
+    }
+  }, [dispatch, history, redirectTo]);
+
   console.log(urlToImage);
 
   return (
@@ -106,7 +121,7 @@ const CreateRecipeForm = () => {
           value={recipeName}
           onChange={handleRecipeName}
         >
-          <Form.Control type="text" placeholder="Enter name" />
+          <Form.Control type="text" placeholder="Enter name" required />
         </Form.Group>
         <br />
         <Card.Text className="createRecipeText">
@@ -122,6 +137,7 @@ const CreateRecipeForm = () => {
             as="textarea"
             aria-label="With textarea"
             style={{ height: "8vh" }}
+            required
           />
         </InputGroup>
         <br />
@@ -175,6 +191,7 @@ const CreateRecipeForm = () => {
                   type="Number"
                   placeholder="Enter required amount"
                   onChange={(e) => handleQuantity(e, index1)}
+                  required
                 />
               </Form.Group>
             </InputGroup>
@@ -198,6 +215,7 @@ const CreateRecipeForm = () => {
             aria-label="With textarea"
             className="formBox"
             style={{ height: "15vh" }}
+            required
           />
         </InputGroup>
         <br />

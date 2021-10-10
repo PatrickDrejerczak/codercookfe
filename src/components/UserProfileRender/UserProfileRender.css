@@ -1,0 +1,13 @@
+.userProfileSettings {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+}
+
+.settings {
+  display: flex;
+  justify-content: flex;
+  align-content: center;
+  align-items: center;
+}
