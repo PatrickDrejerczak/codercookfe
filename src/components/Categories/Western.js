@@ -3,7 +3,7 @@ import RenderWestern from "./RenderWestern";
 
 const Western = () => {
   return (
-    <div>
+    <div className="categoryGroup">
       <h1>Western Cuisine</h1>
       <RenderWestern />
     </div>

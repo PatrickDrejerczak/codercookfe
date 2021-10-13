@@ -38,7 +38,8 @@ const getSingleRecipe =
   async (dispatch) => {
     dispatch({ type: types.GET_SINGLE_RECIPE_REQUEST, payload: null });
     try {
-      const data = await api.get(`recipe/${id}?limit=4`);
+      console.log(id);
+      const data = await api.get(`recipe/${id}`);
 
       dispatch({
         type: types.GET_SINGLE_RECIPE_SUCCESS,
@@ -141,7 +142,6 @@ const addFavorite =
         payload: res.data.data,
       });
 
-      dispatch(routeActions.redirect("__GO_BACK__"));
       toast.success(
         "The recipe has been added to your favorites successfully!"
       );

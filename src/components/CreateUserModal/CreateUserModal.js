@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Modal, Button, Form, Container, Row, Col } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import { authActions } from "../../redux/actions/auth.action";
+import { routeActions } from "../../redux/actions/route.action";
+import { useHistory } from "react-router-dom";
 
 import "./CreateUserModal.css";
 
@@ -20,6 +22,8 @@ const CreateUserModal = (props) => {
   });
 
   const dispatch = useDispatch();
+  const redirectTo = useSelector((state) => state.route.redirectTo);
+  const history = useHistory();
   const loading = useSelector((state) => state.auth.loading);
 
   const handleChange = (e) =>
@@ -34,6 +38,20 @@ const CreateUserModal = (props) => {
     // TODO: handle Register
     dispatch(authActions.register(name, email, password));
   };
+
+  useEffect(() => {
+    if (redirectTo) {
+      if (redirectTo === "__GO_BACK__") {
+        history.goBack();
+        dispatch(routeActions.removeRedirectTo());
+      } else {
+        history.push(redirectTo);
+        dispatch(routeActions.removeRedirectTo());
+      }
+    }
+  }, [dispatch, history, redirectTo]);
+
+  console.log(props);
 
   return (
     <Modal

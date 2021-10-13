@@ -16,7 +16,6 @@ const UpdateUserModal = (props) => {
   const dispatch = useDispatch();
 
   const loading = useSelector((state) => state.auth.loading);
-  const selectedUser = useSelector((state) => state.auth.userById);
 
   const handleChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -66,7 +65,6 @@ const UpdateUserModal = (props) => {
                     value={formData.name}
                     onChange={handleChange}
                   />
-                  Hello
                 </Form.Group>
                 <Form.Group className="signUpInput">
                   <Form.Control
@@ -76,7 +74,6 @@ const UpdateUserModal = (props) => {
                     value={formData.email}
                     onChange={handleChange}
                   />
-                  Hello
                 </Form.Group>
 
                 {loading ? (
@@ -99,7 +96,7 @@ const UpdateUserModal = (props) => {
                     type="submit"
                     variant="primary"
                   >
-                    Create New User
+                    Update User
                   </Button>
                 )}
               </Form>

@@ -111,10 +111,10 @@ const CreateRecipeForm = () => {
         <Card.Text className="createRecipeText">
           <FontAwesomeIcon
             icon="comment-alt"
-            size="2x"
+            size="lg"
             className="searchIcon"
           />
-          Name your dish
+          &nbsp;Name your dish
         </Card.Text>
         <Form.Group
           className="mb-3 formBox"
@@ -125,8 +125,8 @@ const CreateRecipeForm = () => {
         </Form.Group>
         <br />
         <Card.Text className="createRecipeText">
-          <FontAwesomeIcon icon="utensils" size="2x" className="searchIcon" />
-          Description
+          <FontAwesomeIcon icon="utensils" size="lg" className="searchIcon" />
+          &nbsp;Description
         </Card.Text>
         <InputGroup
           value={description}
@@ -144,10 +144,10 @@ const CreateRecipeForm = () => {
         <Card.Text className="createRecipeText">
           <FontAwesomeIcon
             icon="bread-slice"
-            size="2x"
+            size="lg"
             className="searchIcon"
           />
-          Category
+          &nbsp;Category
         </Card.Text>
         <InputGroup className="formBox">
           <Form.Select
@@ -163,8 +163,8 @@ const CreateRecipeForm = () => {
         <br />
 
         <Card.Text className="createRecipeText">
-          <FontAwesomeIcon icon="book" size="2x" className="searchIcon" />
-          Recipe
+          <FontAwesomeIcon icon="book" size="lg" className="searchIcon" />
+          &nbsp;Recipe
         </Card.Text>
         {inputArr.map((i, index1) => (
           <div>
@@ -202,8 +202,8 @@ const CreateRecipeForm = () => {
         </Button>
         <br />
         <Card.Text className="createRecipeText">
-          <FontAwesomeIcon icon="fire-alt" size="2x" className="searchIcon" />
-          <span>Cooking Instructions</span>
+          <FontAwesomeIcon icon="fire-alt" size="lg" className="searchIcon" />
+          &nbsp;<span>Cooking Instructions</span>
         </Card.Text>
         <InputGroup
           value={cookingInstructions}

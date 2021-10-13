@@ -1,4 +1,6 @@
 .storyBox {
-  border: solid 1px black;
   margin-bottom: 30px;
+  margin-left: 8vw;
+  margin-right: 8vw;
+  padding: 4vw;
 }

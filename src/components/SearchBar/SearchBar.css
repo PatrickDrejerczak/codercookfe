@@ -10,7 +10,7 @@
 .search-drop-down {
   position: absolute;
   background-color: none;
-  top: 2.5rem;
+  top: 4.5rem;
   left: 0;
   width: 100%;
   z-index: 1;
@@ -29,9 +29,8 @@ a:hover {
 }
 
 .searchIcon {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  align-content: center;
-  margin-top: 15px;
+  position: absolute;
+  right: 0.5rem;
+  top: 50%;
+  transform: translateY(-50%);
 }

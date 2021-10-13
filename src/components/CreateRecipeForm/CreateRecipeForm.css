@@ -2,7 +2,7 @@
   width: 15vw;
   height: 5vh;
   margin-left: 2vw;
-  background-color: #71bc78;
+  background-color: #007343;
 }
 
 .createRecipeButtons {
@@ -15,12 +15,12 @@
 }
 
 .form-control {
-  border: 1.5px solid #71bc78;
+  border: 1.5px solid #007343;
   height: 7vh;
 }
 
 .form-select {
-  border: 1.5px solid #71bc78;
+  border: 1.5px solid #007343;
   height: 7vh;
 }
 
@@ -37,14 +37,14 @@
   display: flex;
   justify-content: flex-start;
   align-content: center;
-  align-items: center;
+  align-items: baseline;
   padding-top: 5px;
 }
 
 .addButton {
   margin-bottom: 0.5rem;
   width: 5vw;
-  background-color: #71bc78;
+  background-color: #007343;
   font-size: 15px;
 }
 

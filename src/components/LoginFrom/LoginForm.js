@@ -81,17 +81,11 @@ const LoginForm = () => {
 
             {loading ? (
               <Button
-                className="btn-block "
+                className="btn-block loginButton"
+                type="submit"
                 variant="primary"
-                type="button"
-                disabled
               >
-                <span
-                  className="spinner-border spinner-border-sm"
-                  role="status"
-                  aria-hidden="true"
-                ></span>
-                Loading...
+                Login
               </Button>
             ) : (
               <Button

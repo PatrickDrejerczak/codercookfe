@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Card, Button, Table, Container } from "react-bootstrap";
 import { Link } from "react-router-dom";
@@ -7,22 +7,26 @@ import recipeActions from "../../redux/actions/recipe.action";
 import StarRating from "../StarRating/StarRating";
 import Icon from "@mdi/react";
 import { mdiHeart } from "@mdi/js";
+import { useParams } from "react-router";
 
 const RecipeDetailPage = () => {
   const recipe = useSelector((state) => state.recipe.recipeById);
   const user = useSelector((state) => state.auth.user);
-  const recipeLoading = useSelector((state) => state.recipe.recipeLoading);
-  const authLoading = useSelector((state) => state.auth.authLoading);
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
-
   const dispatch = useDispatch();
+  const params = useParams();
+
+  useEffect(() => {
+    dispatch(recipeActions.getSingleRecipe({ id: params.id }));
+  }, [dispatch, params.id]);
+
   const handleFavorite = () => {
     dispatch(recipeActions.addFavorite({ recipeId: recipe._id }));
   };
-  console.log("user", user);
+  console.log("user", recipe);
   return (
     <>
-      {authLoading || recipeLoading ? (
+      {!recipe?.name ? (
         <h1>loading ..</h1>
       ) : (
         <Container fluid>
@@ -34,10 +38,23 @@ const RecipeDetailPage = () => {
               className="imageContainer detailImage"
             />
             <br />
-            <Card.Title className="detailTitle">{recipe.name}</Card.Title>
-            <Card.Subtitle className="mb-2 text-muted detailSubtitle">
-              {recipe.description}
-            </Card.Subtitle>
+            <Card.Title className="detailTitle">
+              <div className="leftAuthorBox">
+                <img
+                  className="authorPicture"
+                  src={recipe.userId?.avatarUrl}
+                  alt="Potrait"
+                />
+                <br />
+                <span className="authorName"> {recipe.userId?.name}</span>
+              </div>
+              <div className="rightAuthorBox">
+                <span className="recipeName">{recipe.name}</span>
+                <br />
+                <span className="recipeDescription">{recipe.description}</span>
+              </div>
+            </Card.Title>
+
             <Card.Body>
               <Table striped bordered hover size="sm">
                 <thead>
@@ -52,7 +69,9 @@ const RecipeDetailPage = () => {
                       <td className="detailRow">
                         {ingredient.ingredient.name}
                       </td>
-                      <td className="detailRow">{ingredient.quantity}</td>
+                      <td className="detailRow">
+                        {ingredient.quantity} {ingredient.ingredient.unit}
+                      </td>
                     </tr>
                   ))}
                 </tbody>
@@ -65,7 +84,7 @@ const RecipeDetailPage = () => {
               <Card.Footer className="text-muted detailFooter">
                 <div className="buttonGroup">
                   {isAuthenticated === true ? (
-                    user?._id === recipe.userId ? (
+                    user?._id === recipe.userId._id ? (
                       <Button
                         variant="success"
                         className="footerButton updateButton"

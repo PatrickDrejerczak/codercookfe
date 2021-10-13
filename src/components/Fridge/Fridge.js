@@ -89,7 +89,10 @@ const Fridge = (props) => {
         <Button
           className="submitButton"
           variant="success"
-          onClick={handleSubmit}
+          onClick={() => {
+            handleSubmit();
+            props.onHide();
+          }}
         >
           Submit
         </Button>

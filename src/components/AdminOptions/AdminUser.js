@@ -8,6 +8,7 @@ import UpdateUserModal from "../UpdateUserModal/UpdateUserModal";
 
 const AdminUser = () => {
   const [modalShow, setModalShow] = React.useState(false);
+  const [userShow, setUserShow] = React.useState(false);
   const dispatch = useDispatch();
   const users = useSelector((state) => state.auth.users);
 
@@ -23,7 +24,7 @@ const AdminUser = () => {
   };
 
   const handleSignUp = () => {
-    setModalShow(true);
+    setUserShow(true);
   };
 
   useEffect(() => {
@@ -53,10 +54,6 @@ const AdminUser = () => {
                           className="adminPress"
                           onClick={() => handleUpdate(index)}
                         >
-                          <UpdateUserModal
-                            show={modalShow}
-                            onHide={() => setModalShow(false)}
-                          />
                           Edit
                         </Button>
                         <Button
@@ -84,13 +81,11 @@ const AdminUser = () => {
             onClick={handleSignUp}
           >
             {" "}
-            <CreateUserModal
-              show={modalShow}
-              onHide={() => setModalShow(false)}
-            />
             + New User
           </Button>{" "}
         </div>
+        <UpdateUserModal show={modalShow} onHide={() => setModalShow(false)} />
+        <CreateUserModal show={userShow} onHide={() => setUserShow(false)} />
         <br />
       </Row>
     </div>

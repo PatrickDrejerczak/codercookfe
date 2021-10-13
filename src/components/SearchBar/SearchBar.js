@@ -10,19 +10,17 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 const SearchBar = () => {
   const [searchInput, setSearchInput] = useState("");
   const dispatch = useDispatch();
-  const recipe = useSelector((state) => state.recipe.recipeById);
+
   const searchRecipes = useSelector((state) => state.recipe.searchRecipes);
   const handleInput = (e) => {
     setSearchInput(e.target.value);
     dispatch(recipeActions.searchRecipe({ search: e.target.value }));
   };
-  const handleOnClick = () => {
-    dispatch(recipeActions.selectedId({ id: recipe._id }));
-  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
   };
-  console.log(searchInput);
+
   return (
     <div style={{ width: "100%" }}>
       <Form id="searchBar" onSubmit={handleSubmit} className="input-wrapper">
@@ -40,15 +38,13 @@ const SearchBar = () => {
         <div className="search-drop-down">
           <Table striped bordered hover size="sm">
             <tbody>
-              {searchRecipes.map((recipe) => (
+              {searchRecipes.map((recipe, index) => (
                 <tr>
                   <td className="reihe">
                     {" "}
                     <Link
-                      as={Link}
                       style={{ textDecoration: "none" }}
-                      onClick={handleOnClick}
-                      to={`recipe/${recipe.id}`}
+                      to={`/recipe/${recipe._id}`}
                     >
                       {recipe.name}
                     </Link>
@@ -57,7 +53,6 @@ const SearchBar = () => {
               ))}
             </tbody>
           </Table>
-          ;
         </div>
         <FontAwesomeIcon icon="search" size="2x" className="searchIcon" />
       </Form>

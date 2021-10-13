@@ -73,6 +73,7 @@ const logout = () => (dispatch) => {
   localStorage.removeItem("accessToken");
   localStorage.removeItem("role");
   dispatch({ type: types.LOGOUT, payload: null });
+  dispatch(routeActions.redirect("/"));
 };
 
 const deleteUser =
@@ -125,7 +126,7 @@ const getUserById =
 
       dispatch({
         type: types.GET_USER_BY_ID_SUCCESS,
-        payload: data.data.data.userById,
+        payload: data.data.data.user,
       });
     } catch (error) {
       toast.error(error.message);
