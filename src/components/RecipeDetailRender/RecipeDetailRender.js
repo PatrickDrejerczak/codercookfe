@@ -88,6 +88,7 @@ const RecipeDetailPage = () => {
                       <Button
                         variant="success"
                         className="footerButton updateButton"
+                        style={{ backgroundColor: "#007343" }}
                       >
                         update
                       </Button>
@@ -117,7 +118,11 @@ const RecipeDetailPage = () => {
                   )}
                 </div>
                 <Link as={Link} to={`/`}>
-                  <Button variant="success" className="footerButton">
+                  <Button
+                    variant="success"
+                    className="footerButton"
+                    style={{ backgroundColor: "#007343" }}
+                  >
                     Main Page
                   </Button>
                 </Link>

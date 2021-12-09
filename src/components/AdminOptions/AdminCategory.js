@@ -3,19 +3,32 @@ import categoryActions from "../../redux/actions/category.action";
 import { useSelector, useDispatch } from "react-redux";
 import { Row, Table, Button } from "react-bootstrap";
 import "./AdminOptions.css";
+import CreateCategory from "../CreateCategory/CreateCategory";
 
 const AdminCategory = () => {
   const dispatch = useDispatch();
   const categories = useSelector((state) => state.category.categories);
+  const [modalShow, setModalShow] = React.useState(false);
 
   useEffect(() => {
     dispatch(categoryActions.getAllCategories());
   }, [dispatch]);
 
+  const handleDelete = (index) => {
+    dispatch(
+      categoryActions.deleteCategory({
+        categoryId: categories[index]._id,
+      })
+    );
+    console.log("testfrontend", categories[index]._id);
+  };
+  const handleNewCategory = () => {
+    setModalShow(true);
+  };
+
   return (
     <div className="row-wrapper">
       <Row>
-        <h1>Categories</h1>
         <br />
         <Table striped bordered hover size="sm">
           <thead>
@@ -25,16 +38,18 @@ const AdminCategory = () => {
           </thead>
           <tbody>
             {categories?.length ? (
-              categories.map((categories) => (
+              categories.map((categories, index) => (
                 <tr>
                   <div>
                     <td className="reihe">
                       {categories.name}
                       <div className="adminButton">
-                        <Button variant="success" className="adminPress">
-                          Edit
-                        </Button>
-                        <Button variant="success" className="adminPress">
+                        <Button
+                          variant="success"
+                          className="adminPress"
+                          style={{ backgroundColor: "#007343" }}
+                          onClick={() => handleDelete(index)}
+                        >
                           Delete
                         </Button>
                       </div>
@@ -47,9 +62,17 @@ const AdminCategory = () => {
             )}
           </tbody>
         </Table>
-        <Button variant="success" className="adminPress">
-          + Category
-        </Button>
+        <div>
+          <Button
+            variant="success"
+            className="adminPress"
+            style={{ backgroundColor: "#007343" }}
+            onClick={handleNewCategory}
+          >
+            + Category
+          </Button>
+        </div>
+        <CreateCategory show={modalShow} onHide={() => setModalShow(false)} />
         <br />
       </Row>
     </div>

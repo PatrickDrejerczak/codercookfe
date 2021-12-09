@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { authActions } from "../../redux/actions/auth.action";
 import { useSelector, useDispatch } from "react-redux";
 import { Row, CardGroup, Col } from "react-bootstrap";
-
+import "./UserProfileRender.css";
 import RecipeCard from "../RecipeCard/RecipeCard";
 import AvatarUploadButton from "../AvatarUploadButton/AvatarUploadButton";
 import recipeActions from "../../redux/actions/recipe.action";
@@ -25,15 +25,17 @@ const UserProfileRender = () => {
     <div>
       <div className="userProfileSettings">
         <div className="settings">
-          <h1>Hello, {user.name}</h1>
-          <img src={user.avatarUrl} alt={user.name} />
-          <br />
-          <br />
-          <AvatarUploadButton />
-          <br />
+          <div className="centerBox">
+            <h1 className="welcomeMessage">Hello {user.name}!</h1>
+            <img className="userAvatar" src={user.avatarUrl} alt={user.name} />
+            <br />
+            <br />
+            <AvatarUploadButton />
+            <br />
+          </div>
         </div>
       </div>
-      <h1>My Recipes</h1>
+      <h1 className="userProfileHeader">My Recipes</h1>
       <div className="row-wrapper">
         <Row>
           <CardGroup>
@@ -44,13 +46,13 @@ const UserProfileRender = () => {
                 </Col>
               ))
             ) : (
-              <h1>Loading...</h1>
+              <h1>No Recipes Created</h1>
             )}
           </CardGroup>
         </Row>
       </div>
       <br />
-      <h1>Favorites</h1>
+      <h1 className="userProfileHeader">Favorites</h1>
       <br />
       <div className="row-wrapper">
         <Row>
@@ -62,7 +64,7 @@ const UserProfileRender = () => {
                 </Col>
               ))
             ) : (
-              <h1>Loading...</h1>
+              <h1>No Favorites Added</h1>
             )}
           </CardGroup>
         </Row>

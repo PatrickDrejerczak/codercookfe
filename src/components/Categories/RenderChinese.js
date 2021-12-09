@@ -17,7 +17,7 @@ const RenderChinese = () => {
   return (
     <Row>
       {data.map((recipe) => (
-        <Col lg={3}>
+        <Col sm={4}>
           {" "}
           <RecipeCard recipe={recipe} />
         </Col>

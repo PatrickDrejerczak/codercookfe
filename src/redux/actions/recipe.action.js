@@ -61,11 +61,11 @@ const selectedId =
   };
 
 const getRecipeByCategory =
-  ({ name }) =>
+  ({ name, pageNum = 1, limit = 6 }) =>
   async (dispatch) => {
     dispatch({ type: types.GET_RECIPE_BY_CATEGORY_REQUEST, payload: null });
     try {
-      const data = await api.get(`recipe/category/${name}?limit=4`);
+      const data = await api.get(`recipe/category/${name}?limit=${limit}`);
 
       dispatch({
         type: types.GET_RECIPE_BY_CATEGORY_SUCCESS,
@@ -145,23 +145,22 @@ const addFavorite =
       toast.success(
         "The recipe has been added to your favorites successfully!"
       );
-    } catch (err) {
-      dispatch({ type: types.PUT_ADD_FAVORITE_FAILURE, payload: err });
-      toast.error("Recipe already favored");
+    } catch (error) {
+      toast.error("Login required");
     }
   };
 
 const deleteRecipe =
-  (recipeId, redirectTo = "_GO_BACK_") =>
+  ({ recipeId }) =>
   async (dispatch) => {
     try {
       dispatch({ type: types.DELETE_RECIPE_REQUEST, payload: null });
       const res = await api.delete(`/recipe/${recipeId}`);
       dispatch({
         type: types.DELETE_RECIPE_SUCCESS,
-        payload: res.data.data,
+        payload: { ...res.data.data, recipeId },
       });
-      dispatch(routeActions.redirect(redirectTo));
+
       toast.success("The recipe has been deleted successfully");
     } catch (err) {
       dispatch({ type: types.DELETE_RECIPE_FAILURE, payload: err });

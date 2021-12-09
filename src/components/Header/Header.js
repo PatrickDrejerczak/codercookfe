@@ -7,6 +7,7 @@ import { useSelector } from "react-redux";
 import { authActions } from "../../redux/actions/auth.action";
 import { useDispatch } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import ReactTooltip from "react-tooltip";
 
 import logo from "./logo.png";
 import Fridge from "../Fridge/Fridge";
@@ -46,6 +47,45 @@ const Header = () => {
         <FontAwesomeIcon icon="chart-line" size="sm" /> User Profile
       </Nav.Link> */}
       <SearchBar />
+      <Nav.Item
+        bsPrefix="nav-item nav-demo"
+        data-tip
+        data-for="circle-card-icon-calendar"
+      >
+        <FontAwesomeIcon icon="chart-line" size="lg" />
+        Demo
+        <ReactTooltip
+          id="circle-card-icon-calendar"
+          type="error"
+          className="cirlce-tooltip"
+          arrowColor="#dedede"
+        >
+          <div style={{ fontWeight: "normal" }}>
+            <h6>Demo account: </h6>
+            <div>User with recipes:</div>
+            <ul>
+              <li>
+                email:
+                <strong style={{ textTransform: "lowercase" }}>
+                  {" "}
+                  user@user.com
+                </strong>
+              </li>
+              <li>password: Hello</li>
+            </ul>
+            <div>Admin:</div>
+            <ul>
+              <li>
+                email:{" "}
+                <strong style={{ textTransform: "lowercase" }}>
+                  admin@admin.com
+                </strong>
+              </li>
+              <li>password: Hello</li>
+            </ul>
+          </div>
+        </ReactTooltip>
+      </Nav.Item>{" "}
     </Nav>
   );
 
@@ -62,11 +102,49 @@ const Header = () => {
         />{" "}
         Logout
       </Nav.Link>
-
       {/* <Nav.Link as={Link} to={`/user/profile/${userId}`}>
         <FontAwesomeIcon icon="chart-line" size="sm" /> User Profile
       </Nav.Link> */}
       <SearchBar />
+      <Nav.Item
+        bsPrefix="nav-item nav-demo"
+        data-tip
+        data-for="circle-card-icon-calendar"
+      >
+        <FontAwesomeIcon icon="chart-line" size="lg" />
+        Demo
+        <ReactTooltip
+          id="circle-card-icon-calendar"
+          type="error"
+          className="cirlce-tooltip"
+          arrowColor="#dedede"
+        >
+          <div style={{ fontWeight: "normal" }}>
+            <h6>Demo account: </h6>
+            <div>User with recipes:</div>
+            <ul>
+              <li>
+                email:
+                <strong style={{ textTransform: "lowercase" }}>
+                  {" "}
+                  user@user.com
+                </strong>
+              </li>
+              <li>password: Hello</li>
+            </ul>
+            <div>Admin:</div>
+            <ul>
+              <li>
+                email:{" "}
+                <strong style={{ textTransform: "lowercase" }}>
+                  admin@admin.com
+                </strong>
+              </li>
+              <li>password: Hello</li>
+            </ul>
+          </div>
+        </ReactTooltip>
+      </Nav.Item>{" "}
     </Nav>
   );
 
@@ -83,6 +161,45 @@ const Header = () => {
       </Nav.Link>
       <Fridge show={modalShow} onHide={() => setModalShow(false)} />
       <SearchBar />
+      <Nav.Item
+        bsPrefix="nav-item nav-demo"
+        data-tip
+        data-for="circle-card-icon-calendar"
+      >
+        <FontAwesomeIcon icon="chart-line" size="lg" />
+        Demo
+        <ReactTooltip
+          id="circle-card-icon-calendar"
+          type="error"
+          className="cirlce-tooltip"
+          arrowColor="#dedede"
+        >
+          <div style={{ fontWeight: "normal" }}>
+            <h6>Demo account: </h6>
+            <div>User with recipes:</div>
+            <ul>
+              <li>
+                email:
+                <strong style={{ textTransform: "lowercase" }}>
+                  {" "}
+                  user@user.com
+                </strong>
+              </li>
+              <li>password: Hello</li>
+            </ul>
+            <div>Admin:</div>
+            <ul>
+              <li>
+                email:{" "}
+                <strong style={{ textTransform: "lowercase" }}>
+                  admin@admin.com
+                </strong>
+              </li>
+              <li>password: Hello</li>
+            </ul>
+          </div>
+        </ReactTooltip>
+      </Nav.Item>{" "}
     </Nav>
   );
   console.log(role);

@@ -25,6 +25,7 @@ const ImgUploadButton = () => {
     <div>
       <Button
         variant="success"
+        style={{ backgroundColor: "#007343" }}
         onClick={myWidget.open}
         id="upload_widget"
         className="cloudinary-button"

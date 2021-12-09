@@ -109,11 +109,7 @@ const CreateRecipeForm = () => {
           Create A New Recipe
         </Card.Title>
         <Card.Text className="createRecipeText">
-          <FontAwesomeIcon
-            icon="comment-alt"
-            size="lg"
-            className="searchIcon"
-          />
+          <FontAwesomeIcon icon="comment-alt" size="lg" />
           &nbsp;Name your dish
         </Card.Text>
         <Form.Group
@@ -125,7 +121,7 @@ const CreateRecipeForm = () => {
         </Form.Group>
         <br />
         <Card.Text className="createRecipeText">
-          <FontAwesomeIcon icon="utensils" size="lg" className="searchIcon" />
+          <FontAwesomeIcon icon="utensils" size="lg" />
           &nbsp;Description
         </Card.Text>
         <InputGroup
@@ -142,11 +138,7 @@ const CreateRecipeForm = () => {
         </InputGroup>
         <br />
         <Card.Text className="createRecipeText">
-          <FontAwesomeIcon
-            icon="bread-slice"
-            size="lg"
-            className="searchIcon"
-          />
+          <FontAwesomeIcon icon="bread-slice" size="lg" />
           &nbsp;Category
         </Card.Text>
         <InputGroup className="formBox">
@@ -163,7 +155,7 @@ const CreateRecipeForm = () => {
         <br />
 
         <Card.Text className="createRecipeText">
-          <FontAwesomeIcon icon="book" size="lg" className="searchIcon" />
+          <FontAwesomeIcon icon="book" size="lg" />
           &nbsp;Recipe
         </Card.Text>
         {inputArr.map((i, index1) => (
@@ -202,7 +194,7 @@ const CreateRecipeForm = () => {
         </Button>
         <br />
         <Card.Text className="createRecipeText">
-          <FontAwesomeIcon icon="fire-alt" size="lg" className="searchIcon" />
+          <FontAwesomeIcon icon="fire-alt" size="lg" />
           &nbsp;<span>Cooking Instructions</span>
         </Card.Text>
         <InputGroup

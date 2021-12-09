@@ -81,13 +81,19 @@ const Fridge = (props) => {
             </InputGroup>
           </div>
         ))}
-        <Button className="addButton" variant="success" onClick={handleOnClick}>
+        <Button
+          className="addButton"
+          variant="success"
+          onClick={handleOnClick}
+          style={{ backgroundColor: "#007343" }}
+        >
           +
         </Button>
       </Modal.Body>
       <Modal.Footer>
         <Button
           className="submitButton"
+          style={{ backgroundColor: "#007343" }}
           variant="success"
           onClick={() => {
             handleSubmit();

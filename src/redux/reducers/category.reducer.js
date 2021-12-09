@@ -29,7 +29,16 @@ const categoryReducer = (state = initialState, action) => {
         loading: false,
         isAuthenticated: true,
       };
-
+    case types.DELETE_CATEGORY_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        categories: [
+          ...state.categories.filter(
+            (category) => category._id !== payload.categoryId
+          ),
+        ],
+      };
     case types.GET_CATEGORY_FAILURE:
     case types.GET_SINGLE_CATEGORY_FAILURE:
     case types.POST_CATEGORY_FAILURE:

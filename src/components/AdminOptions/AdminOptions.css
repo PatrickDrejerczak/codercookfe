@@ -13,3 +13,13 @@
   background-color: #007343 !important;
   margin-left: 10px;
 }
+
+.kopf {
+  font-size: 20px;
+  font-weight: 800;
+}
+
+.reihe {
+  font-size: 15px;
+  font-weight: 800;
+}

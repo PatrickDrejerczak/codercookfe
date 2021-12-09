@@ -34,10 +34,10 @@ const getSingleIngredient = () => async (dispatch) => {
   }
 };
 
-const createIngredient = (formData) => async (dispatch) => {
+const createIngredient = (name, type, unit) => async (dispatch) => {
   dispatch({ type: types.POST_INGREDIENT_REQUEST, payload: null });
   try {
-    const res = await api.post("/ingredient", formData);
+    const res = await api.post("/ingredient", { name, type, unit });
     console.log("addIngredient", res);
     dispatch({
       type: types.POST_INGREDIENT_SUCCESS,
@@ -70,16 +70,16 @@ const updateIngredient = (ingredientId, formData) => async (dispatch) => {
 };
 
 const deleteIngredient =
-  (ingredientId, redirectTo = "_GO_BACK_") =>
+  ({ ingredientId }) =>
   async (dispatch) => {
     try {
       dispatch({ type: types.DELETE_INGREDIENT_REQUEST, payload: null });
       const res = await api.delete(`/ingredient/${ingredientId}`);
       dispatch({
         type: types.DELETE_INGREDIENT_SUCCESS,
-        payload: res.data.data,
+        payload: { ...res.data.data, ingredientId },
       });
-      dispatch(routeActions.redirect(redirectTo));
+
       toast.success("The ingredient has been deleted successfully");
     } catch (err) {
       dispatch({ type: types.DELETE_INGREDIENT_FAILURE, payload: err });
@@ -94,4 +94,5 @@ const ingredientActions = {
   updateIngredient,
   createIngredient,
 };
+
 export default ingredientActions;

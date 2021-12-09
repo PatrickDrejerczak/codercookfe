@@ -40,10 +40,18 @@ const AdminOptions = () => {
                     <td className="reihe">
                       {recipes.name}{" "}
                       <div className="adminButton">
-                        <Button variant="success" className="adminPress">
+                        <Button
+                          variant="success"
+                          className="adminPress"
+                          style={{ backgroundColor: "#007343" }}
+                        >
                           Edit
                         </Button>
-                        <Button variant="success" className="adminPress">
+                        <Button
+                          variant="success"
+                          className="adminPress"
+                          style={{ backgroundColor: "#007343" }}
+                        >
                           Delete
                         </Button>
                       </div>
@@ -56,7 +64,11 @@ const AdminOptions = () => {
             )}
           </tbody>
         </Table>
-        <Button variant="success" className="adminPress">
+        <Button
+          variant="success"
+          className="adminPress"
+          style={{ backgroundColor: "#007343" }}
+        >
           + New Recipe
         </Button>
         <br />
@@ -76,7 +88,11 @@ const AdminOptions = () => {
                     <td className="reihe">
                       {ingredients.name}{" "}
                       <div className="adminButton">
-                        <Button variant="success" className="adminPress">
+                        <Button
+                          variant="success"
+                          className="adminPress"
+                          style={{ backgroundColor: "#007343" }}
+                        >
                           Edit
                         </Button>
                         <Button variant="success" className="adminPress">

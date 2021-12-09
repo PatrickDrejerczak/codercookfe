@@ -14,3 +14,16 @@
 .carouselTitle {
   text-align: center;
 }
+
+.carouselCaption {
+  background-color: rgb(125, 144, 140);
+  width: 50%;
+  margin: auto;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.carousel-control-next,
+.carousel-control-prev /*, .carousel-indicators */ {
+  filter: invert(100%);
+}

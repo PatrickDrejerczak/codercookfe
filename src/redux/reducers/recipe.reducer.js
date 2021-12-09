@@ -19,6 +19,7 @@ const recipeReducer = (state = initialState, action) => {
   const { type, payload } = action;
   switch (type) {
     case types.GET_RECIPE_REQUEST:
+    case types.DELETE_RECIPE_REQUEST:
     case types.PUT_ADD_FAVORITE_REQUEST:
     case types.GET_SINGLE_RECIPE_REQUEST:
     case types.GET_FAVORITES_REQUEST:
@@ -32,7 +33,20 @@ const recipeReducer = (state = initialState, action) => {
     case types.POST_RECIPE_SUCCESS:
       return { ...state, loading: false, formData: payload };
     case types.GET_RECIPE_BY_CATEGORY_SUCCESS:
-      return { ...state, recipeByCategory: payload };
+      return {
+        ...state,
+        recipeByCategory: payload,
+      };
+    case types.DELETE_RECIPE_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        recipes: [
+          ...state.recipes.filter(
+            (recipes) => recipes._id !== payload.recipeId
+          ),
+        ],
+      };
     case types.PUT_ADD_FAVORITE_SUCCESS:
       return { ...state, favorites: payload };
     case types.GET_RECIPE_BY_USER_ID_SUCCESS:
@@ -41,8 +55,6 @@ const recipeReducer = (state = initialState, action) => {
       return {
         ...state,
         recipes: payload,
-        totalPageNum: payload.totalPages,
-        loading: false,
       };
     case types.GET_SINGLE_RECIPE_SUCCESS:
       return {

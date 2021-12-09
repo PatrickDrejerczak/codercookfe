@@ -17,11 +17,11 @@ const AdminUser = () => {
     console.log("testfrontend", users[index]._id);
   };
 
-  const handleUpdate = (index) => {
-    dispatch(authActions.getUserById({ userId: users[index]._id }));
-    setModalShow(true);
-    console.log("testfrontend", users[index]._id);
-  };
+  // const handleUpdate = (index) => {
+  //   dispatch(authActions.updateUser({ userId: users[index]._id }));
+  //   setModalShow(true);
+  //   console.log("testfrontend", users[index]._id);
+  // };
 
   const handleSignUp = () => {
     setUserShow(true);
@@ -34,7 +34,6 @@ const AdminUser = () => {
   return (
     <div className="row-wrapper">
       <Row>
-        <h1>User</h1>
         <Table striped bordered hover size="sm">
           <thead>
             <tr>
@@ -47,15 +46,15 @@ const AdminUser = () => {
                 <tr>
                   <div>
                     <td className="reihe">
-                      {users.name} {users._id}
+                      {users.name}
                       <div className="adminButton">
-                        <Button
+                        {/* <Button
                           variant="success"
                           className="adminPress"
                           onClick={() => handleUpdate(index)}
                         >
                           Edit
-                        </Button>
+                        </Button> */}
                         <Button
                           variant="success"
                           className="adminPress"

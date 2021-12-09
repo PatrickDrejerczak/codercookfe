@@ -42,13 +42,18 @@ const ModalBox = (props) => {
         <Button
           onClick={props.onHide}
           variant="success"
+          style={{ backgroundColor: "#007343" }}
           className="footerButton"
         >
           Close
         </Button>
 
         <Link as={Link} to={`/recipe/${takeId}`}>
-          <Button variant="success" className="footerButton">
+          <Button
+            variant="success"
+            className="footerButton"
+            style={{ backgroundColor: "#007343" }}
+          >
             See Detailed Recipe
           </Button>
         </Link>

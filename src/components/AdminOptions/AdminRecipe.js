@@ -8,8 +8,8 @@ const AdminRecipe = () => {
   const dispatch = useDispatch();
   const recipes = useSelector((state) => state.recipe.recipes);
 
-  const handleDelete = () => {
-    dispatch(recipeActions.deleteRecipe(recipes._id));
+  const handleDelete = (index) => {
+    dispatch(recipeActions.deleteRecipe({ recipeId: recipes[index]._id }));
   };
 
   useEffect(() => {
@@ -19,8 +19,6 @@ const AdminRecipe = () => {
   return (
     <div className="row-wrapper">
       <Row>
-        <h1>Recipes</h1>
-
         <Table striped bordered hover size="sm">
           <thead>
             <tr>
@@ -29,19 +27,17 @@ const AdminRecipe = () => {
           </thead>
           <tbody>
             {recipes?.length ? (
-              recipes.map((recipes) => (
+              recipes.map((recipes, index) => (
                 <tr>
                   <div>
                     <td className="reihe">
-                      {recipes.name}{" "}
+                      {recipes.name}
+
                       <div className="adminButton">
-                        <Button variant="success" className="adminPress">
-                          Edit
-                        </Button>
                         <Button
                           variant="success"
                           className="adminPress"
-                          onClick={handleDelete}
+                          onClick={() => handleDelete(index)}
                         >
                           Delete
                         </Button>
@@ -55,9 +51,7 @@ const AdminRecipe = () => {
             )}
           </tbody>
         </Table>
-        <Button variant="success" className="adminPress">
-          + New Recipe
-        </Button>
+
         <br />
       </Row>
     </div>

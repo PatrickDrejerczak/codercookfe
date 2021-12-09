@@ -2,15 +2,25 @@ import React, { useEffect } from "react";
 import ingredientActions from "../../redux/actions/ingredient.action";
 import { useSelector, useDispatch } from "react-redux";
 import { Table, Button, Row } from "react-bootstrap";
+import CreateIngredient from "../CreateIngredient/CreateIngredient";
 import "./AdminOptions.css";
 
 const AdminIngredients = () => {
+  const [modalShow, setModalShow] = React.useState(false);
   const dispatch = useDispatch();
 
   const ingredients = useSelector((state) => state.ingredient.ingredients);
 
-  const handleDelete = () => {
-    dispatch(ingredientActions.deleteIngredient(ingredients._id));
+  const handleDelete = (index) => {
+    dispatch(
+      ingredientActions.deleteIngredient({
+        ingredientId: ingredients[index]._id,
+      })
+    );
+    console.log("testfrontend", ingredients[index]._id);
+  };
+  const handleNewIngredient = () => {
+    setModalShow(true);
   };
 
   useEffect(() => {
@@ -20,7 +30,6 @@ const AdminIngredients = () => {
   return (
     <div className="row-wrapper">
       <Row>
-        <h1>Ingredients</h1>
         <Table striped bordered hover size="sm">
           <thead>
             <tr>
@@ -29,19 +38,17 @@ const AdminIngredients = () => {
           </thead>
           <tbody>
             {ingredients?.length ? (
-              ingredients.map((ingredients) => (
+              ingredients.map((ingredients, index) => (
                 <tr>
                   <div>
                     <td className="reihe">
                       {ingredients.name}{" "}
                       <div className="adminButton">
-                        <Button variant="success" className="adminPress">
-                          Edit
-                        </Button>
                         <Button
                           variant="success"
                           className="adminPress"
-                          onClick={handleDelete}
+                          onClick={() => handleDelete(index)}
+                          style={{ backgroundColor: "#007343" }}
                         >
                           Delete
                         </Button>
@@ -55,9 +62,17 @@ const AdminIngredients = () => {
             )}
           </tbody>
         </Table>
-        <Button variant="success" className="adminPress">
-          + New Ingredient
-        </Button>
+        <div>
+          <Button
+            variant="success"
+            className="adminPress"
+            style={{ backgroundColor: "#007343" }}
+            onClick={handleNewIngredient}
+          >
+            + New Ingredient
+          </Button>
+        </div>
+        <CreateIngredient show={modalShow} onHide={() => setModalShow(false)} />
       </Row>
     </div>
   );

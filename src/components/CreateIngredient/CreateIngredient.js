@@ -1,23 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { Modal, Button, Form, Container, Row, Col } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
-import { authActions } from "../../redux/actions/auth.action";
+import ingredientActions from "../../redux/actions/ingredient.action";
 import { routeActions } from "../../redux/actions/route.action";
 
-import "./CreateUserModal.css";
+import "./CreateIngredient.css";
 
-const CreateUserModal = (props) => {
+const CreateIngredient = (props) => {
   const [formData, setFormData] = useState({
     name: "",
-    email: "",
-    password: "",
-    password2: "",
-  });
-  const [errors, setErrors] = useState({
-    name: "",
-    email: "",
-    password: "",
-    password2: "",
+    type: "",
+    unit: "",
   });
 
   const dispatch = useDispatch();
@@ -29,13 +22,10 @@ const CreateUserModal = (props) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   const handleSubmit = (e) => {
     e.preventDefault();
-    const { name, email, password, password2 } = formData;
-    if (password !== password2) {
-      setErrors({ ...errors, password2: "Passwords do not match" });
-      return;
-    }
+    const { name, type, unit } = formData;
+
     // TODO: handle Register
-    dispatch(authActions.register(name, email, password));
+    dispatch(ingredientActions.createIngredient(name, type, unit));
     window.location.reload(false);
   };
 
@@ -60,7 +50,7 @@ const CreateUserModal = (props) => {
     >
       <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter">
-          Create New User
+          Create New Ingredient
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
@@ -69,19 +59,6 @@ const CreateUserModal = (props) => {
             <Col md={{ span: 6, offset: 3 }}>
               <Form onSubmit={handleSubmit}>
                 <Form.Group className="signUpInput">
-                  <div className="text-center">
-                    {formData.avatarUrl && (
-                      <div className="mb-3">
-                        <img
-                          src={formData.avatarUrl}
-                          className="avatar-lg"
-                          alt="avatar"
-                        />
-                      </div>
-                    )}
-                  </div>
-                </Form.Group>
-                <Form.Group className="signUpInput">
                   <Form.Control
                     type="text"
                     placeholder="Name"
@@ -89,46 +66,22 @@ const CreateUserModal = (props) => {
                     value={formData.name}
                     onChange={handleChange}
                   />
-                  {errors.name && (
-                    <small className="form-text text-danger">
-                      {errors.name}
-                    </small>
-                  )}
                 </Form.Group>
                 <Form.Group className="signUpInput">
                   <Form.Control
-                    type="email"
-                    placeholder="Email Address"
-                    name="email"
-                    value={formData.email}
+                    type="text"
+                    placeholder="main or spice"
+                    name="type"
+                    value={formData.type}
                     onChange={handleChange}
                   />
-                  {errors.email && (
-                    <small className="form-text text-danger">
-                      {errors.email}
-                    </small>
-                  )}
                 </Form.Group>
                 <Form.Group className="signUpInput">
                   <Form.Control
-                    type="password"
-                    placeholder="Password"
-                    name="password"
-                    value={formData.password}
-                    onChange={handleChange}
-                  />
-                  {errors.password && (
-                    <small className="form-text text-danger">
-                      {errors.password}
-                    </small>
-                  )}
-                </Form.Group>
-                <Form.Group className="signUpInput">
-                  <Form.Control
-                    type="password"
-                    placeholder="Confirm Password"
-                    name="password2"
-                    value={formData.password2}
+                    type="text"
+                    placeholder="unit"
+                    name="unit"
+                    value={formData.unit}
                     onChange={handleChange}
                   />
                 </Form.Group>
@@ -153,7 +106,7 @@ const CreateUserModal = (props) => {
                     type="submit"
                     variant="primary"
                   >
-                    Create New User
+                    Create New Ingredient
                   </Button>
                 )}
               </Form>
@@ -174,4 +127,4 @@ const CreateUserModal = (props) => {
   );
 };
 
-export default CreateUserModal;
+export default CreateIngredient;

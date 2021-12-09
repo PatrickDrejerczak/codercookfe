@@ -70,10 +70,10 @@ const getCurrentUser = (accessToken) => async (dispatch) => {
 
 const logout = () => (dispatch) => {
   delete api.defaults.headers.common.Authorization;
+  dispatch(routeActions.redirect("/"));
   localStorage.removeItem("accessToken");
   localStorage.removeItem("role");
   dispatch({ type: types.LOGOUT, payload: null });
-  dispatch(routeActions.redirect("/"));
 };
 
 const deleteUser =
@@ -134,6 +134,24 @@ const getUserById =
     }
   };
 
+const updateUser =
+  ({ userId, name, email }) =>
+  async (dispatch) => {
+    console.log("testRedux", userId);
+    dispatch({ type: types.PUT_UPDATE_USER_REQUEST, payload: null });
+    try {
+      const data = await api.put(`/user/${userId}`, { name, email });
+
+      dispatch({
+        type: types.PUT_UPDATE_USER_SUCCESS,
+        payload: data.data.data.user,
+      });
+    } catch (error) {
+      toast.error(error.message);
+      dispatch({ type: types.PUT_UPDATE_USER_FAILURE, payload: error });
+    }
+  };
+
 export const authActions = {
   loginRequest,
   register,
@@ -144,4 +162,5 @@ export const authActions = {
   getAllUser,
   avatarUpload,
   getUserById,
+  updateUser,
 };

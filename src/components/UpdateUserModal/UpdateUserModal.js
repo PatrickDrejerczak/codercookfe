@@ -9,8 +9,6 @@ const UpdateUserModal = (props) => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
-    password: "",
-    password2: "",
   });
 
   const dispatch = useDispatch();
@@ -24,7 +22,7 @@ const UpdateUserModal = (props) => {
     const { name, email } = formData;
 
     // TODO: handle Register
-    dispatch(authActions.updateProfile(name, email));
+    dispatch(authActions.updateUser(name, email));
   };
 
   return (
@@ -109,6 +107,7 @@ const UpdateUserModal = (props) => {
           onClick={props.onHide}
           variant="success"
           className="footerButton"
+          style={{ backgroundColor: "#007343" }}
         >
           Close
         </Button>

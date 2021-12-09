@@ -18,6 +18,7 @@ const CategoryRender = () => {
           )}
         </CardGroup>
       </Row>
+      <br />
     </div>
   );
 };

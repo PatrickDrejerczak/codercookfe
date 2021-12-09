@@ -52,7 +52,7 @@ const CreateRecipeSideBar = () => {
           <SubMenu key="sub2" title="Starter">
             <Menu.Item key="6">Cheese Platter</Menu.Item>
           </SubMenu>
-          <SubMenu key="sub3" title="Main Dish">
+          <SubMenu key="sub3" title="Main">
             <Link as={Link} to="/category/vegetarian">
               <Menu.Item key="7">Vegetarian</Menu.Item>
             </Link>
