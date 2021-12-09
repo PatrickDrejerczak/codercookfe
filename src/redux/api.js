@@ -5,14 +5,17 @@ const api = axios.create({
   baseURL: process.env.REACT_APP_BACKEND_API,
   headers: {
     "Content-Type": "application/json",
-    authorization: "Bearer " + localStorage.getItem("accessToken"),
+    Authorization: "Bearer " + localStorage.getItem("accessToken"),
   },
 });
 /**
  * console.log all requests and responses
  */
+
 api.interceptors.request.use(
   (request) => {
+    request.headers.Authorization =
+      "Bearer " + localStorage.getItem("accessToken");
     console.log("Starting Request", request);
     return request;
   },

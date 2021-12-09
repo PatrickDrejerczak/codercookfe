@@ -3,7 +3,7 @@ import RenderMexican from "./RenderMexican";
 
 const Mexican = () => {
   return (
-    <div>
+    <div className="categoryGroup">
       <h1>Mexican Cuisine</h1>
       <RenderMexican />
     </div>

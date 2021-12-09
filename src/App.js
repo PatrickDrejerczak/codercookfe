@@ -1,6 +1,8 @@
 import React from "react";
 import { Switch, Route } from "react-router-dom";
 import AdminPage from "./pages/AdminPage";
+import AOS from "aos";
+import "aos/dist/aos.css";
 import HomePage from "./pages/HomePage";
 import CategoryPage from "./pages/CategoryPage";
 import RecipeDetailPage from "./pages/RecipeDetailPage";
@@ -36,10 +38,23 @@ import {
   faChartLine,
   faSignOutAlt,
   faSignInAlt,
+  faSearch,
+  faBreadSlice,
+  faCarrot,
+  faCommentAlt,
+  faUtensils,
+  faBook,
+  faFireAlt,
+  faPlusSquare,
 } from "@fortawesome/free-solid-svg-icons";
 
 import { fab } from "@fortawesome/free-brands-svg-icons";
 import UserPage from "./pages/UserPage";
+import AdminUserPage from "./pages/AdminUserPage";
+import AdminCategoryPage from "./pages/AdminCategoryPage";
+import AdminIngredientsPage from "./pages/AdminIngredientsPage";
+import AdminRecipePage from "./pages/AdminRecipePage";
+import FridgePage from "./pages/FridgePage";
 
 library.add(
   fab,
@@ -61,10 +76,19 @@ library.add(
   faRegistered,
   faChartLine,
   faSignOutAlt,
-  faSignInAlt
+  faSignInAlt,
+  faSearch,
+  faUtensils,
+  faBook,
+  faBreadSlice,
+  faCarrot,
+  faCommentAlt,
+  faFireAlt,
+  faPlusSquare
 );
 
 function App() {
+  AOS.init();
   const dispatch = useDispatch();
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   useEffect(() => {
@@ -88,12 +112,30 @@ function App() {
           <Header />
           <Switch>
             <Route path="/" exact component={HomePage} />
+            <Route path="/recipe/match" exact component={FridgePage} />
             <Route path="/category/:name" exact component={CategoryPage} />
             <Route path="/recipe/:id" exact component={RecipeDetailPage} />
             <Route path="/signup" exact component={SignupPage} />
             <Route path="/login" exact component={LoginPage} />
             <Route path="/create" exact component={CreateRecipePage} />
             <Route path="/user/:id" exact component={UserPage} />
+
+            <Route path="/admin/useroption" exact component={AdminUserPage} />
+            <Route
+              path="/admin/recipeoption"
+              exact
+              component={AdminRecipePage}
+            />
+            <Route
+              path="/admin/ingredientsoption"
+              exact
+              component={AdminIngredientsPage}
+            />
+            <Route
+              path="/admin/categoryoption"
+              exact
+              component={AdminCategoryPage}
+            />
             <Route path="/admin/:id" exact component={AdminPage} />
           </Switch>
         </div>

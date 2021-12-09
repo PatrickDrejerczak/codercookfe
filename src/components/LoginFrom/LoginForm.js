@@ -3,6 +3,7 @@ import { Container, Row, Col, Form, Button } from "react-bootstrap";
 import { Redirect, Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { authActions } from "../../redux/actions/auth.action";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./LoginForm.css";
 
 const LoginForm = () => {
@@ -40,7 +41,14 @@ const LoginForm = () => {
           <Form onSubmit={handleSubmit}>
             <div className="text-center mb-3">
               <h1 className="text-primary">Sign In</h1>
-              <p className="lead">Sign Into Your Account</p>
+              <p className="lead">
+                <FontAwesomeIcon
+                  icon="user"
+                  size="1x"
+                  className="signUpFormTitle"
+                />
+                Sign Into Your Account
+              </p>
             </div>
             <Form.Group>
               <Form.Control
@@ -73,17 +81,11 @@ const LoginForm = () => {
 
             {loading ? (
               <Button
-                className="btn-block "
+                className="btn-block loginButton"
+                type="submit"
                 variant="primary"
-                type="button"
-                disabled
               >
-                <span
-                  className="spinner-border spinner-border-sm"
-                  role="status"
-                  aria-hidden="true"
-                ></span>
-                Loading...
+                Login
               </Button>
             ) : (
               <Button

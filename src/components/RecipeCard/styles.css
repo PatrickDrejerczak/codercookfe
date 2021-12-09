@@ -4,8 +4,18 @@
   transform: scale(1.05);
 }
 
+.recipeCard {
+  height: 45vh;
+  overflow: hidden;
+  width: 20vw;
+}
 .imgContainer {
   position: relative;
   overflow: hidden;
   transition: all 0.1s linear;
+}
+
+.recipeCardPicture {
+  height: 30vh;
+  width: 20vw;
 }

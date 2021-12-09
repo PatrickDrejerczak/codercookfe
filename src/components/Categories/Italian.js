@@ -3,7 +3,7 @@ import RenderItalian from "./RenderItalian";
 
 const Italian = () => {
   return (
-    <div>
+    <div className="categoryGroup">
       <h1>Italian Cuisine</h1>
       <RenderItalian />
     </div>

@@ -7,10 +7,13 @@ import { useSelector } from "react-redux";
 import { authActions } from "../../redux/actions/auth.action";
 import { useDispatch } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import ReactTooltip from "react-tooltip";
 
 import logo from "./logo.png";
+import Fridge from "../Fridge/Fridge";
 
 const Header = () => {
+  const [modalShow, setModalShow] = React.useState(false);
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   const role = useSelector((state) => state.auth.role);
   const dispatch = useDispatch();
@@ -18,51 +21,185 @@ const Header = () => {
     dispatch(authActions.logout());
   };
 
+  const handleOnClick = () => {
+    setModalShow(true);
+  };
+
   const authLinks = (
     <Nav>
-      <Nav.Link as={Link} to="/admin/profile">
-        <FontAwesomeIcon icon="chart-line" size="sm" /> User
+      <Nav.Link className="headerLink navLink" as={Link} to="/user/profile">
+        <FontAwesomeIcon icon="chart-line" size="lg" /> User
       </Nav.Link>
-      <Nav.Link onClick={handleLogout}>
-        <FontAwesomeIcon icon="sign-out-alt" size="sm" /> Logout
+      <Nav.Link className="headerLink navLink" onClick={handleLogout}>
+        <FontAwesomeIcon icon="sign-out-alt" size="lg" /> Logout
       </Nav.Link>
-      <Nav.Link href="http://localhost:3000/create" className="navLink">
+      <Nav.Link
+        className="headerLink navLink"
+        href="http://localhost:3000/create"
+      >
         Create Recipe
       </Nav.Link>
+      <Nav.Link className="navLink" onClick={handleOnClick}>
+        What´s in your Fridge?
+      </Nav.Link>
+      <Fridge show={modalShow} onHide={() => setModalShow(false)} />
       {/* <Nav.Link as={Link} to={`/user/profile/${userId}`}>
         <FontAwesomeIcon icon="chart-line" size="sm" /> User Profile
       </Nav.Link> */}
       <SearchBar />
+      <Nav.Item
+        bsPrefix="nav-item nav-demo"
+        data-tip
+        data-for="circle-card-icon-calendar"
+      >
+        <FontAwesomeIcon icon="chart-line" size="lg" />
+        Demo
+        <ReactTooltip
+          id="circle-card-icon-calendar"
+          type="error"
+          className="cirlce-tooltip"
+          arrowColor="#dedede"
+        >
+          <div style={{ fontWeight: "normal" }}>
+            <h6>Demo account: </h6>
+            <div>User with recipes:</div>
+            <ul>
+              <li>
+                email:
+                <strong style={{ textTransform: "lowercase" }}>
+                  {" "}
+                  user@user.com
+                </strong>
+              </li>
+              <li>password: Hello</li>
+            </ul>
+            <div>Admin:</div>
+            <ul>
+              <li>
+                email:{" "}
+                <strong style={{ textTransform: "lowercase" }}>
+                  admin@admin.com
+                </strong>
+              </li>
+              <li>password: Hello</li>
+            </ul>
+          </div>
+        </ReactTooltip>
+      </Nav.Item>{" "}
     </Nav>
   );
 
   const adminLinks = (
     <Nav>
-      <Nav.Link as={Link} to="/admin/profile">
+      <Nav.Link as={Link} to="/admin/profile" className="headerLink navLink">
         <FontAwesomeIcon icon="chart-line" size="sm" /> Admin
       </Nav.Link>
-      <Nav.Link onClick={handleLogout}>
-        <FontAwesomeIcon icon="sign-out-alt" size="sm" /> Logout
-      </Nav.Link>
-      <Nav.Link href="http://localhost:3000/create" className="navLink">
-        Create Recipe
+      <Nav.Link onClick={handleLogout} className="headerLink navLink">
+        <FontAwesomeIcon
+          className="headerLink navLink"
+          icon="sign-out-alt"
+          size="sm"
+        />{" "}
+        Logout
       </Nav.Link>
       {/* <Nav.Link as={Link} to={`/user/profile/${userId}`}>
         <FontAwesomeIcon icon="chart-line" size="sm" /> User Profile
       </Nav.Link> */}
       <SearchBar />
+      <Nav.Item
+        bsPrefix="nav-item nav-demo"
+        data-tip
+        data-for="circle-card-icon-calendar"
+      >
+        <FontAwesomeIcon icon="chart-line" size="lg" />
+        Demo
+        <ReactTooltip
+          id="circle-card-icon-calendar"
+          type="error"
+          className="cirlce-tooltip"
+          arrowColor="#dedede"
+        >
+          <div style={{ fontWeight: "normal" }}>
+            <h6>Demo account: </h6>
+            <div>User with recipes:</div>
+            <ul>
+              <li>
+                email:
+                <strong style={{ textTransform: "lowercase" }}>
+                  {" "}
+                  user@user.com
+                </strong>
+              </li>
+              <li>password: Hello</li>
+            </ul>
+            <div>Admin:</div>
+            <ul>
+              <li>
+                email:{" "}
+                <strong style={{ textTransform: "lowercase" }}>
+                  admin@admin.com
+                </strong>
+              </li>
+              <li>password: Hello</li>
+            </ul>
+          </div>
+        </ReactTooltip>
+      </Nav.Item>{" "}
     </Nav>
   );
 
   const publicLinks = (
     <Nav>
-      <Nav.Link as={Link} to="/signup">
+      <Nav.Link as={Link} to="/signup" className="headerLink navLink">
         <FontAwesomeIcon icon="registered" size="sm" /> Register
       </Nav.Link>
-      <Nav.Link as={Link} to="/login">
+      <Nav.Link as={Link} to="/login" className="headerLink navLink">
         <FontAwesomeIcon icon="sign-in-alt" size="sm" /> Login
       </Nav.Link>
+      <Nav.Link className="navLink" onClick={handleOnClick}>
+        What´s in your Fridge?
+      </Nav.Link>
+      <Fridge show={modalShow} onHide={() => setModalShow(false)} />
       <SearchBar />
+      <Nav.Item
+        bsPrefix="nav-item nav-demo"
+        data-tip
+        data-for="circle-card-icon-calendar"
+      >
+        <FontAwesomeIcon icon="chart-line" size="lg" />
+        Demo
+        <ReactTooltip
+          id="circle-card-icon-calendar"
+          type="error"
+          className="cirlce-tooltip"
+          arrowColor="#dedede"
+        >
+          <div style={{ fontWeight: "normal" }}>
+            <h6>Demo account: </h6>
+            <div>User with recipes:</div>
+            <ul>
+              <li>
+                email:
+                <strong style={{ textTransform: "lowercase" }}>
+                  {" "}
+                  user@user.com
+                </strong>
+              </li>
+              <li>password: Hello</li>
+            </ul>
+            <div>Admin:</div>
+            <ul>
+              <li>
+                email:{" "}
+                <strong style={{ textTransform: "lowercase" }}>
+                  admin@admin.com
+                </strong>
+              </li>
+              <li>password: Hello</li>
+            </ul>
+          </div>
+        </ReactTooltip>
+      </Nav.Item>{" "}
     </Nav>
   );
   console.log(role);
@@ -73,8 +210,8 @@ const Header = () => {
           <img
             src={logo}
             alt=""
-            width="30"
-            height="30"
+            width="50"
+            height="50"
             className="d-inline-block align-top"
           />
           CoderCook

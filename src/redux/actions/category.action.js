@@ -35,10 +35,10 @@ const getSingleCategory = () => async (dispatch) => {
   }
 };
 
-const createCategory = (formData) => async (dispatch) => {
+const createCategory = (name) => async (dispatch) => {
   dispatch({ type: types.POST_CATEGORY_REQUEST, payload: null });
   try {
-    const res = await api.post("/category", formData);
+    const res = await api.post("/category", { name });
     console.log("addCategory", res);
     dispatch({
       type: types.POST_CATEGORY_SUCCESS,
@@ -71,16 +71,15 @@ const updateCategory = (categoryId, formData) => async (dispatch) => {
 };
 
 const deleteCategory =
-  (categoryId, redirectTo = "_GO_BACK_") =>
+  ({ categoryId }) =>
   async (dispatch) => {
     try {
       dispatch({ type: types.DELETE_CATEGORY_REQUEST, payload: null });
       const res = await api.delete(`/category/${categoryId}`);
       dispatch({
         type: types.DELETE_CATEGORY_SUCCESS,
-        payload: res.data.data,
+        payload: { ...res.data.data, categoryId },
       });
-      dispatch(routeActions.redirect(redirectTo));
       toast.success("The category has been deleted successfully");
     } catch (err) {
       dispatch({ type: types.DELETE_CATEGORY_FAILURE, payload: err });

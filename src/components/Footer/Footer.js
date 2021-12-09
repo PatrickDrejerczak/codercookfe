@@ -29,7 +29,7 @@ const Footer = () => {
           </div>
           <p
             style={{
-              fontSize: "10px",
+              fontSize: "14px",
               color: "black",
               display: "flex",
               justifyContent: "center",

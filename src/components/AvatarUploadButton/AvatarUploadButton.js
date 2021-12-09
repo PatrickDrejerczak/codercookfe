@@ -1,13 +1,14 @@
 import React from "react";
 
-import recipeActions from "../../redux/actions/recipe.action";
+import { authActions } from "../../redux/actions/auth.action";
 import { useDispatch, useSelector } from "react-redux";
 import "./AvatarUploadButton.css";
 import { Button } from "react-bootstrap";
 
 const AvatarUploadButton = () => {
   const dispatch = useDispatch();
-  const urlToImage = useSelector((state) => state.recipe.urlToImage);
+  const avatarUrl = useSelector((state) => state.auth.avatarUrl);
+
   var myWidget = window.cloudinary.createUploadWidget(
     {
       cloudName: "drupykrkw",
@@ -16,7 +17,8 @@ const AvatarUploadButton = () => {
     (error, result) => {
       if (!error && result && result.event === "success") {
         console.log("Done! Here is the image info: ", result.info);
-        dispatch(recipeActions.uploadImage({ avatarUrl: result.info.url }));
+        dispatch(authActions.avatarUpload({ avatarUrl: result.info.url }));
+        dispatch(authActions.updateProfile(avatarUrl));
       }
     }
   );
@@ -29,13 +31,13 @@ const AvatarUploadButton = () => {
         id="upload_widget"
         className="cloudinary-button"
       >
-        Upload files
+        Change Avatar
       </Button>
 
       <img
-        src={urlToImage}
+        src={avatarUrl}
         alt="hello"
-        style={urlToImage ? { display: "block" } : { display: "none" }}
+        style={avatarUrl ? { display: "block" } : { display: "none" }}
       />
     </div>
   );

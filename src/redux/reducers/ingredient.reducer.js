@@ -21,6 +21,16 @@ const ingredientReducer = (state = initialState, action) => {
         ingredients: payload,
         loading: false,
       };
+    case types.DELETE_INGREDIENT_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        ingredients: [
+          ...state.ingredients.filter(
+            (ingredient) => ingredient._id !== payload.ingredientId
+          ),
+        ],
+      };
     case types.GET_SINGLE_INGREDIENT_SUCCESS:
       return {
         ...state,

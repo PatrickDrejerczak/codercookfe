@@ -10,7 +10,7 @@ const loginRequest = (email, password) => async (dispatch) => {
     const name = res.data.data.user.name;
     dispatch({ type: types.LOGIN_SUCCESS, payload: res.data.data });
     toast.success(`Welcome ${name}`);
-    api.defaults.headers.common["authorization"] =
+    api.defaults.headers.common.Authorization =
       "Bearer " + res.data.data.accessToken;
     localStorage.setItem("accessToken", res.data.data.accessToken);
     localStorage.setItem("role", res.data.data.user.role);
@@ -29,7 +29,7 @@ const register = (name, email, password) => async (dispatch) => {
     // dispatch(routeActions.redirect("/verify/_"));
     // const name = res.data.data.user.name;
     // dispatch(alertActions.setAlert(`Welcome, ${name}`, "success"));
-    // api.defaults.headers.common["authorization"] =
+    // api.defaults.headers.common["Authorization"] =
     //   "Bearer " + res.data.data.accessToken;
   } catch (error) {
     dispatch({ type: types.REGISTER_FAILURE, payload: error });
@@ -39,7 +39,10 @@ const register = (name, email, password) => async (dispatch) => {
 const updateProfile = (name, avatarUrl, userId) => async (dispatch) => {
   dispatch({ type: types.PUT_PROFILE_REQUEST, payload: null });
   try {
-    const res = await api.put(`/user/me}`, { name, avatarUrl });
+    const res = await api.put(`/user/${userId}`, {
+      name,
+      avatarUrl,
+    });
     dispatch({ type: types.PUT_PROFILE_SUCCESS, payload: res.data.data });
     toast.success(`Your profile has been updated.`);
   } catch (error) {
@@ -49,10 +52,12 @@ const updateProfile = (name, avatarUrl, userId) => async (dispatch) => {
 
 const getCurrentUser = (accessToken) => async (dispatch) => {
   dispatch({ type: types.GET_CURRENT_USER_REQUEST, payload: null });
+  console.log("test hier", accessToken);
   if (accessToken) {
     const bearerToken = "Bearer " + accessToken;
-    api.defaults.headers.common["authorization"] = bearerToken;
+    api.defaults.headers.common["Authorization"] = bearerToken;
   }
+
   try {
     const res = await api.get(`/user/me`);
     console.log(res);
@@ -64,23 +69,25 @@ const getCurrentUser = (accessToken) => async (dispatch) => {
 };
 
 const logout = () => (dispatch) => {
-  delete api.defaults.headers.common["authorization"];
+  delete api.defaults.headers.common.Authorization;
+  dispatch(routeActions.redirect("/"));
   localStorage.removeItem("accessToken");
   localStorage.removeItem("role");
   dispatch({ type: types.LOGOUT, payload: null });
 };
 
 const deleteUser =
-  (userId, redirectTo = "_GO_BACK_") =>
+  ({ userId }) =>
   async (dispatch) => {
+    console.log("testtest", userId);
     try {
       dispatch({ type: types.DELETE_USER_REQUEST, payload: null });
       const res = await api.delete(`/user/${userId}`);
       dispatch({
         type: types.DELETE_USER_SUCCESS,
-        payload: res.data.data,
+        payload: { ...res.data.data, userId },
       });
-      dispatch(routeActions.redirect(redirectTo));
+
       toast.success("The user has been deleted successfully");
     } catch (err) {
       dispatch({ type: types.DELETE_USER_FAILURE, payload: err });
@@ -103,6 +110,48 @@ const getAllUser = () => async (dispatch) => {
   }
 };
 
+const avatarUpload =
+  ({ avatarUrl }) =>
+  (dispatch) => {
+    dispatch({ type: types.UPLOAD_IMAGE, payload: avatarUrl });
+  };
+
+const getUserById =
+  ({ userId }) =>
+  async (dispatch) => {
+    console.log("testRedux", userId);
+    dispatch({ type: types.GET_USER_BY_ID_REQUEST, payload: null });
+    try {
+      const data = await api.get(`/user/${userId}`);
+
+      dispatch({
+        type: types.GET_USER_BY_ID_SUCCESS,
+        payload: data.data.data.user,
+      });
+    } catch (error) {
+      toast.error(error.message);
+      dispatch({ type: types.GET_USER_BY_ID_FAILURE, payload: error });
+    }
+  };
+
+const updateUser =
+  ({ userId, name, email }) =>
+  async (dispatch) => {
+    console.log("testRedux", userId);
+    dispatch({ type: types.PUT_UPDATE_USER_REQUEST, payload: null });
+    try {
+      const data = await api.put(`/user/${userId}`, { name, email });
+
+      dispatch({
+        type: types.PUT_UPDATE_USER_SUCCESS,
+        payload: data.data.data.user,
+      });
+    } catch (error) {
+      toast.error(error.message);
+      dispatch({ type: types.PUT_UPDATE_USER_FAILURE, payload: error });
+    }
+  };
+
 export const authActions = {
   loginRequest,
   register,
@@ -111,4 +160,7 @@ export const authActions = {
   logout,
   deleteUser,
   getAllUser,
+  avatarUpload,
+  getUserById,
+  updateUser,
 };

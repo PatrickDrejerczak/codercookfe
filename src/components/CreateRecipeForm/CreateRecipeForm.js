@@ -14,6 +14,9 @@ import ingredientActions from "../../redux/actions/ingredient.action";
 import categoryActions from "../../redux/actions/category.action";
 import recipeActions from "../../redux/actions/recipe.action";
 import "./CreateRecipeForm.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { routeActions } from "../../redux/actions/route.action";
+import { useHistory } from "react-router";
 
 const CreateRecipeForm = () => {
   const dispatch = useDispatch();
@@ -24,7 +27,8 @@ const CreateRecipeForm = () => {
   const ingredients = useSelector((state) => state.ingredient.ingredients);
   const categories = useSelector((state) => state.category.categories);
   const urlToImage = useSelector((state) => state.recipe.urlToImage);
-
+  const redirectTo = useSelector((state) => state.route.redirectTo);
+  const history = useHistory();
   const [inputArr, setInputArr] = useState([{ ingredient: "", quantity: "" }]);
   const handleOnClick = () => {
     setInputArr([...inputArr, { ingredient: "", quantity: "" }]);
@@ -84,6 +88,18 @@ const CreateRecipeForm = () => {
     dispatch(categoryActions.getAllCategories());
   }, [dispatch]);
 
+  useEffect(() => {
+    if (redirectTo) {
+      if (redirectTo === "__GO_BACK__") {
+        history.goBack();
+        dispatch(routeActions.removeRedirectTo());
+      } else {
+        history.push(redirectTo);
+        dispatch(routeActions.removeRedirectTo());
+      }
+    }
+  }, [dispatch, history, redirectTo]);
+
   console.log(urlToImage);
 
   return (
@@ -92,17 +108,22 @@ const CreateRecipeForm = () => {
         <Card.Title className="createRecipeTitle">
           Create A New Recipe
         </Card.Title>
-        <Card.Text className="createRecipeText">Name your dish</Card.Text>
+        <Card.Text className="createRecipeText">
+          <FontAwesomeIcon icon="comment-alt" size="lg" />
+          &nbsp;Name your dish
+        </Card.Text>
         <Form.Group
           className="mb-3 formBox"
-          controlId="formBasicEmail"
           value={recipeName}
           onChange={handleRecipeName}
         >
-          <Form.Control type="text" placeholder="Enter name" />
+          <Form.Control type="text" placeholder="Enter name" required />
         </Form.Group>
         <br />
-        <Card.Text className="createRecipeText">Description</Card.Text>
+        <Card.Text className="createRecipeText">
+          <FontAwesomeIcon icon="utensils" size="lg" />
+          &nbsp;Description
+        </Card.Text>
         <InputGroup
           value={description}
           onChange={handleDescription}
@@ -112,10 +133,14 @@ const CreateRecipeForm = () => {
             as="textarea"
             aria-label="With textarea"
             style={{ height: "8vh" }}
+            required
           />
         </InputGroup>
         <br />
-        <Card.Text className="createRecipeText">Category</Card.Text>
+        <Card.Text className="createRecipeText">
+          <FontAwesomeIcon icon="bread-slice" size="lg" />
+          &nbsp;Category
+        </Card.Text>
         <InputGroup className="formBox">
           <Form.Select
             aria-label="Default select example"
@@ -129,7 +154,10 @@ const CreateRecipeForm = () => {
         </InputGroup>
         <br />
 
-        <Card.Text className="createRecipeText">Recipe</Card.Text>
+        <Card.Text className="createRecipeText">
+          <FontAwesomeIcon icon="book" size="lg" />
+          &nbsp;Recipe
+        </Card.Text>
         {inputArr.map((i, index1) => (
           <div>
             <InputGroup className="formBox">
@@ -150,11 +178,12 @@ const CreateRecipeForm = () => {
                 ))}
               </Form.Select>
 
-              <Form.Group className="mb-3" controlId="formBasicEmail">
+              <Form.Group className="mb-3 amountBox" controlId="formBasicEmail">
                 <Form.Control
                   type="Number"
                   placeholder="Enter required amount"
                   onChange={(e) => handleQuantity(e, index1)}
+                  required
                 />
               </Form.Group>
             </InputGroup>
@@ -164,7 +193,10 @@ const CreateRecipeForm = () => {
           +
         </Button>
         <br />
-        <Card.Text className="createRecipeText">Cooking Instructions</Card.Text>
+        <Card.Text className="createRecipeText">
+          <FontAwesomeIcon icon="fire-alt" size="lg" />
+          &nbsp;<span>Cooking Instructions</span>
+        </Card.Text>
         <InputGroup
           value={cookingInstructions}
           onChange={handleCookingInstructions}
@@ -175,6 +207,7 @@ const CreateRecipeForm = () => {
             aria-label="With textarea"
             className="formBox"
             style={{ height: "15vh" }}
+            required
           />
         </InputGroup>
         <br />

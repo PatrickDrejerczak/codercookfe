@@ -1,0 +1,28 @@
+.settings {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  flex-direction: column;
+}
+
+.userProfileHeader {
+  font-weight: 800;
+  margin-top: 2rem;
+  text-transform: uppercase;
+  background-color: rgba(0, 0, 0, 0.05);
+  color: black;
+  padding: 0.5rem;
+  text-align: center;
+}
+
+.userAvatar {
+  height: 20vh;
+  width: 15vw;
+  border-radius: 50%;
+}
+
+.welcomeMessage {
+  font-weight: 700;
+  text-align: center;
+}

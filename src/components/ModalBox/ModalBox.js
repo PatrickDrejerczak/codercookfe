@@ -1,10 +1,11 @@
-import React from "react";
-import { Modal, Button } from "react-bootstrap";
+import { Modal, Button, Table } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 const ModalBox = (props) => {
   const takeId = useSelector((state) => state.recipe.selectedId);
+  const recipe = useSelector((state) => state.recipe.recipeById);
+
   return (
     <Modal
       {...props}
@@ -14,21 +15,47 @@ const ModalBox = (props) => {
     >
       <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter">
-          Ingredients Required
+          Required Ingredients Preview
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <h4>Grilled Chicken Kebab with Fries</h4>
-        <ul>
-          <li>Chicken</li>
-          <li>French Fries</li>
-        </ul>
+        <Table striped bordered hover size="sm">
+          <thead>
+            <tr>
+              <th className="kopf">Ingredients</th>
+              <th className="kopf">Quantity</th>
+            </tr>
+          </thead>
+          <tbody>
+            {recipe.ingredients?.map((ingredient) => (
+              <tr>
+                <td className="detailRow">{ingredient.ingredient.name}</td>
+                <td className="detailRow">
+                  {ingredient.quantity} {ingredient.ingredient.unit}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </Table>
       </Modal.Body>
       <Modal.Footer>
-        <Button onClick={props.onHide}>Close</Button>
+        <Button
+          onClick={props.onHide}
+          variant="success"
+          style={{ backgroundColor: "#007343" }}
+          className="footerButton"
+        >
+          Close
+        </Button>
 
         <Link as={Link} to={`/recipe/${takeId}`}>
-          <Button>See Detailed Recipe</Button>
+          <Button
+            variant="success"
+            className="footerButton"
+            style={{ backgroundColor: "#007343" }}
+          >
+            See Detailed Recipe
+          </Button>
         </Link>
       </Modal.Footer>
     </Modal>
