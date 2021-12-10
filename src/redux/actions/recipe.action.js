@@ -97,7 +97,7 @@ const getRecipeByUserId =
 const createRecipe = (formData) => async (dispatch) => {
   dispatch({ type: types.POST_RECIPE_REQUEST, payload: null });
   try {
-    const res = await api.post("/recipe", formData);
+    const res = await api.post(`/recipe`, formData);
     console.log("addRecipe", res);
     dispatch({
       type: types.POST_RECIPE_SUCCESS,
