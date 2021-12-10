@@ -26,6 +26,7 @@ const register = (name, email, password) => async (dispatch) => {
     dispatch({ type: types.REGISTER_SUCCESS, payload: res.data.data });
     dispatch(routeActions.redirect("/login"));
     toast.success(`Thank you for your registration, ${name}!`);
+    dispatch(authActions.getAllUser());
     // dispatch(routeActions.redirect("/verify/_"));
     // const name = res.data.data.user.name;
     // dispatch(alertActions.setAlert(`Welcome, ${name}`, "success"));
