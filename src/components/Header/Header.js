@@ -35,7 +35,7 @@ const Header = () => {
       </Nav.Link>
       <Nav.Link
         className="headerLink navLink"
-        href="http://localhost:3000/create"
+        href="https://codercook.netlify.app/create"
       >
         Create Recipe
       </Nav.Link>
