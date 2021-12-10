@@ -33,10 +33,7 @@ const Header = () => {
       <Nav.Link className="headerLink navLink" onClick={handleLogout}>
         <FontAwesomeIcon icon="sign-out-alt" size="lg" /> Logout
       </Nav.Link>
-      <Nav.Link
-        className="headerLink navLink"
-        href="https://codercook.netlify.app/create"
-      >
+      <Nav.Link className="headerLink navLink" href="/create">
         Create Recipe
       </Nav.Link>
       <Nav.Link className="navLink" onClick={handleOnClick}>
