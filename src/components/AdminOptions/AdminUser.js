@@ -9,6 +9,7 @@ import UpdateUserModal from "../UpdateUserModal/UpdateUserModal";
 const AdminUser = () => {
   const [modalShow, setModalShow] = React.useState(false);
   const [userShow, setUserShow] = React.useState(false);
+  const [selectedUserId, setSelectedUserId] = React.useState("");
   const dispatch = useDispatch();
   const users = useSelector((state) => state.auth.users);
 
