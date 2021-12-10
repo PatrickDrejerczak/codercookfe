@@ -7,6 +7,7 @@ import { routeActions } from "../../redux/actions/route.action";
 import "./CreateUserModal.css";
 
 const CreateUserModal = (props) => {
+  console.log(props);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -36,7 +37,13 @@ const CreateUserModal = (props) => {
     }
     // TODO: handle Register
     dispatch(authActions.register(name, email, password));
-    window.location.reload(false);
+    setFormData({
+      name: "",
+      email: "",
+      password: "",
+      password2: "",
+    });
+    // window.location.reload(false);
   };
 
   useEffect(() => {
@@ -53,7 +60,8 @@ const CreateUserModal = (props) => {
 
   return (
     <Modal
-      {...props}
+      onHide={() => props.setShow(false)}
+      show={props.show}
       size="lg"
       aria-labelledby="contained-modal-title-vcenter"
       centered
@@ -152,6 +160,7 @@ const CreateUserModal = (props) => {
                     className="btn-block signUpButton"
                     type="submit"
                     variant="primary"
+                    onClick={() => props.setShow(false)}
                   >
                     Create New User
                   </Button>
@@ -163,7 +172,7 @@ const CreateUserModal = (props) => {
       </Modal.Body>
       <Modal.Footer>
         <Button
-          onClick={props.onHide}
+          onClick={() => props.setShow(false)}
           variant="success"
           className="footerButton"
         >
